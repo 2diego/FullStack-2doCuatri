@@ -9,27 +9,83 @@ import { Camiones } from "./camiones";
 import { Motos } from "./motos";
 
 export class RegAutomotor {
-  private regAutos: Autos[];
-  private regCamiones: Camiones[];
-  private regMotos: Motos[];
+  private localidad: string;
+  private regAutos: Autos[] = [];
+  private regCamiones: Camiones[] = [];
+  private regMotos: Motos[] = [];
 
-  constructor (registrarAuto?: Autos, registrarCamion?: Camiones, registrarMotos?: Motos) {
-    if (registrarAuto != undefined) {
+  constructor (nuevaLocalidad: string, registrarAuto?: Autos, registrarCamion?: Camiones, registrarMotos?: Motos) { //DEBERIA ESTAR VACIO?
+    
+    this.localidad = nuevaLocalidad;
+
+    if (registrarAuto !== undefined) {
       this.regAutos.push(registrarAuto)
     } else {
       return
     }
 
-    if (registrarCamion != undefined) {
+    if (registrarCamion !== undefined) {
       this.regCamiones.push(registrarCamion)
     } else {
       return
     }
 
-    if (registrarMotos != undefined) {
+    if (registrarMotos !== undefined) {
       this.regMotos.push(registrarMotos)
     } else {
       return
     }
   }
+//GET
+  public getAutos(): Autos[] {
+    return this.regAutos;
+  }
+
+  public getCamiones(): Camiones[] { 
+    return this.regCamiones;
+  }
+
+  public getMotos(): Motos[] {
+    return this.regMotos;
+  }
+//ADD
+  public addAuto(nuevoAuto: Autos): void {
+    this.regAutos.push(nuevoAuto);
+  }
+
+  public addCamion(nuevoCamion: Camiones): void {
+    this.regCamiones.push(nuevoCamion);
+  }
+
+  public addMoto(nuevaMoto: Motos): void {
+    this.regMotos.push(nuevaMoto);
+  }
+//DELETE
+  public deleteAuto(patente: string): boolean {
+    let index = this.regAutos.findIndex(auto => auto.getPatente() === patente);
+    if (index !== -1) {
+      this.regAutos.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
+  public deleteCamion(patente: string): boolean {
+    let index = this.regCamiones.findIndex(camion => camion.getPatente() === patente);
+    if (index !== -1) {
+      this.regCamiones.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
+  public deleteMoto(patente: string): boolean {
+    let index = this.regMotos.findIndex(moto => moto.getPatente() === patente);
+    if (index !== -1) {
+      this.regMotos.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
 }
