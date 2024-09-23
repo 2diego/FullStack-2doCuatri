@@ -16,7 +16,7 @@ export class Camiones {
     this.año = nuevoAño;
     this.patente = nuevaPatente;
   }
-
+//GET
   public getMarca(): string {
     return this.marca;
   }
@@ -32,7 +32,7 @@ export class Camiones {
   public getPatente(): string {
     return this.patente;
   }
-
+//SET
   public setMarca(nuevaMarca: string): void {
     this.marca = nuevaMarca;
   }
