@@ -37,6 +37,10 @@ export class RegAutomotor {
     }
   }
 //GET
+  public getLocalidad(): string {
+    return this.localidad;
+  }
+
   public getAutos(): Autos[] {
     return this.regAutos;
   }
