@@ -24,6 +24,7 @@ let camion_2 = new Camiones("Scania", "Marca2", 2010, "DDD444");
 let moto_1 = new Motos("Zanella", "Motito", 2004, "EEE555");
 let moto_2 = new Motos("Harley Davidson", "Chopper", 2013, "FFF666");
 
+//add
 regAutomotorOlavarria.addAuto(auto_1);
 regAutomotorOlavarria.addAuto(auto_2);
 regAutomotorOlavarria.addCamion(camion_1);
@@ -32,7 +33,11 @@ regAutomotorOlavarria.addMoto(moto_1);
 regAutomotorOlavarria.addMoto(moto_2);
 
 //get
+let autosOlavarria = regAutomotorOlavarria.getAutos();
+console.log("Get antes del delete: ")
+console.log(autosOlavarria)
 
 //delete
-
-//get
+regAutomotorOlavarria.deleteAuto("BBB222");
+console.log("Get despues del delete: ")
+console.log(autosOlavarria)
