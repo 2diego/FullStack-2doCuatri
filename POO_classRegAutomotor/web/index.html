@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Automotor</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+
+    <header>
+      <label for="sede-select">Seleccionar sede del Registro Automotor:</label>
+      <select id="sede-select">
+      </select>
+    </header>
+
+    <div class="container">
+
+      <!-- Formulario para crear instancias -->
+      <div class="column">
+        <h2>Registrar Vehículo</h2>
+        <label for="automotor-select">Tipo de Vehículo:</label>
+        <select id="automotor-select">
+          <option value="auto">Auto</option>
+          <option value="moto">Moto</option>
+          <option value="camion">Camión</option>
+        </select>
+
+        <!-- Inputs datos del vehículo -->
+        <div>
+          <label for="marca">Marca:</label>
+          <input type="text" id="marca">
+        </div>
+        <div>
+          <label for="modelo">Modelo:</label>
+          <input type="text" id="modelo">
+        </div>
+        <div>
+          <label for="año">Año:</label>
+          <input type="number" id="año">
+        </div>
+        <div>
+          <label for="patente">Patente:</label>
+          <input type="text" id="patente">
+        </div>
+        <button id="add-btn">Agregar Vehículo</button>
+      </div>
+
+      <!-- Lista Autos -->
+      <div class="column">
+        <h2>Autos</h2>
+        <ul id="autos-lista">  
+        </ul>
+      </div>
+
+      <!-- Lista Motos -->
+      <div class="column">
+        <h2>Motos</h2>
+        <ul id="motos-lista">
+        </ul>
+      </div>
+
+      <!-- Lista Camiones -->
+      <div class="column">
+        <h2>Camiones</h2>
+        <ul id="camiones-lista">
+        </ul>
+      </div>
+
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

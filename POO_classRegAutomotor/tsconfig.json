@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "outDir": "./web",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true, 
+    "forceConsistentCasingInFileNames": true,
+    "types": []
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules"] 
+}
