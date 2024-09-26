@@ -5,10 +5,6 @@ metodos:
 • AgregarVehiculo, get y set, modificar un
 vehiculo, dar de baja*/
 Object.defineProperty(exports, "__esModule", { value: true });
-/* preg
-*extends
-*get/set keywords
-*/
 var autos_1 = require("./autos");
 var camiones_1 = require("./camiones");
 var motos_1 = require("./motos");
@@ -20,6 +16,7 @@ var camion_1 = new camiones_1.Camiones("Mercedes Benz", "Marca", 2019, "CCC333")
 var camion_2 = new camiones_1.Camiones("Scania", "Marca2", 2010, "DDD444");
 var moto_1 = new motos_1.Motos("Zanella", "Motito", 2004, "EEE555");
 var moto_2 = new motos_1.Motos("Harley Davidson", "Chopper", 2013, "FFF666");
+//add
 regAutomotorOlavarria.addAuto(auto_1);
 regAutomotorOlavarria.addAuto(auto_2);
 regAutomotorOlavarria.addCamion(camion_1);
@@ -34,4 +31,11 @@ console.log(autosOlavarria);
 regAutomotorOlavarria.deleteAuto("BBB222");
 console.log("Get despues del delete: ");
 console.log(autosOlavarria);
-//get
+//set
+var camionesOlavarria = regAutomotorOlavarria.getCamiones();
+console.log("Camiones antes del set: ");
+console.log(camionesOlavarria);
+camion_1.setAño(2022);
+camion_2.setPatente("SET123");
+console.log("Camiones despues del set: ");
+console.log(camionesOlavarria);

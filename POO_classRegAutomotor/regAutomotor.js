@@ -32,6 +32,9 @@ var RegAutomotor = /** @class */ (function () {
         }
     }
     //GET
+    RegAutomotor.prototype.getLocalidad = function () {
+        return this.localidad;
+    };
     RegAutomotor.prototype.getAutos = function () {
         return this.regAutos;
     };

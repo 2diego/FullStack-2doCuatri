@@ -35,9 +35,20 @@ regAutomotorOlavarria.addMoto(moto_2);
 //get
 let autosOlavarria = regAutomotorOlavarria.getAutos();
 console.log("Get antes del delete: ")
-console.log(autosOlavarria)
+console.log(autosOlavarria);
 
 //delete
 regAutomotorOlavarria.deleteAuto("BBB222");
 console.log("Get despues del delete: ")
 console.log(autosOlavarria)
+
+//set
+let camionesOlavarria = regAutomotorOlavarria.getCamiones();
+console.log("Camiones antes del set: ")
+console.log(camionesOlavarria);
+
+camion_1.setAño(2022);
+camion_2.setPatente("SET123");
+
+console.log("Camiones despues del set: ")
+console.log(camionesOlavarria);
