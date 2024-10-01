@@ -75,7 +75,8 @@ h1 {
 
 .top-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
+  margin-left: 10px;
 }
 
 .number, .poke-name {
