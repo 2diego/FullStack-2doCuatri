@@ -2,7 +2,7 @@ export class Vehiculo {
   private marca: string;
   private modelo: string;
   private year: number;
-  protected patente: string;
+  protected patente!: string;
 
   constructor (marca: string, modelo: string, year: number) {
     this.marca = marca;
