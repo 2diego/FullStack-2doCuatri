@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Obtener datos de Pokemon desde la PokeAPI
   async function fetchPokemon() {
-    const pokemonIds = [1, 2, 3, 4, 5, 6, 7, 8].map(i => Math.floor(Math.random() * 150) + 1); // 8 Pokémon aleatorios
+    const pokemonIds = [1, 2, 3, 4, 5, 6, 7, 8].map(i => Math.floor(Math.random() * 151) + 1); // 8 Pokémon aleatorios
 
     try {
       const responses = await Promise.all(pokemonIds.map(id => fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)));
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return {
           name: pokemon.name,
-          image: pokemon.sprites.front_default,
+          image: pokemon.sprites.other["official-artwork"].front_default,
           id: pokemon.id,
           types: types
         };
