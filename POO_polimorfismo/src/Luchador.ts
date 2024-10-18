@@ -13,11 +13,13 @@ export class Luchador extends Heroe {
     let dmg = this.atkMagico * (1 - (heroe.defMagica/100))
     heroe.vida -= dmg;
     console.log(`${heroe.nombre} recibio un ataque de ${dmg} puntos de vida de ${this.nombre}`);
+    this.sumarExperiencia(dmg);
   }
   public ataqueFisico(heroe: Heroe): void {
     let dmg = this.atkFisico * (1 - (heroe.defFisica/100))
     heroe.vida -= dmg;
     console.log(`${heroe.nombre} recibio un ataque de ${dmg} puntos de vida de ${this.nombre}`);
+    this.sumarExperiencia(dmg);
   }
   public defensaMagica() {
     this.defMagica = this.defMagica * 1.20;

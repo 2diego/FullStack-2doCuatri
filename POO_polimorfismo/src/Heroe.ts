@@ -21,4 +21,18 @@ export abstract class Heroe {
  abstract defensaFisica(): void;
 
  abstract curar(): void;
+
+ public sumarExperiencia(dmg: number): void {
+  this.experiencia += dmg;
+  console.log(`${this.nombre} ha ganado ${dmg} puntos de experiencia. Experiencia total: ${this.experiencia}`);
+  this.verificarNivel();
+}
+
+private verificarNivel(): void {
+  if (this.experiencia >= 100) {
+    this.nivel++;
+    this.experiencia -= 100;
+    console.log(`${this.nombre} ha subido de nivel! Ahora es nivel ${this.nivel}.`);
+  }
+}
 }
