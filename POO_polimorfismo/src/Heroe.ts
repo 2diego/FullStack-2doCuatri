@@ -1,7 +1,7 @@
 export abstract class Heroe {
   public nombre: string;
   public nivel: number = 1;
-  public experiencia: number = 0; // if exp > 100, level up (recursiva)
+  public experiencia: number = 0;
   public vida: number;
   public atkFisico: number;
   public atkMagico: number;

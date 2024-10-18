@@ -41,5 +41,3 @@ export class Habilidad {
     return true;
   }
 }
-
-//CODEAR QUE AL ABRIR UNA CAJA DESBLOQUEA UNA HABILIDAD NUEVA USABLE AL NV 1

@@ -4,8 +4,6 @@ import { Mago } from "./Mago";
 import { Arquero } from "./Arquero";
 import * as readlineSync from 'readline-sync';
 
-// AGREGAR OPCIONES DE EXIT, EXPERIENCIA Y LVLUP
-
 export function game(): void {
 
   let nombre: string = readlineSync.question("Ingresa tu nombre: ");
@@ -149,7 +147,7 @@ export function game(): void {
           game();
           } else {
             process.exit();
-            } // AGREGAR VALIDACION
+            }
       }
 
       // Mostrar la vida restante de ambos personajes
