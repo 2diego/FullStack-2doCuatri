@@ -16,26 +16,30 @@ export class Habilidad {
   }
 
   public habilidadAtk(heroe: Heroe, target: Heroe): void {
-    if (heroe.nivel >= this.nivel) {
-      if (heroe instanceof this.usuario.constructor) {
-        this.efecto(target);
-      } else {
-        console.log(`${heroe.nombre} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
-      }
-    } else {
-      console.log(`Necesitas ser nivel ${this.nivel} para usar esta habilidad.`);
+    if (this.verificarAcceso(heroe)) {
+      this.efecto(target);
     }
   }
 
   public habilidadDef(heroe: Heroe): void {
-    if (heroe.nivel >= this.nivel) {
-      if (heroe instanceof this.usuario.constructor) {
-        this.efecto(heroe);
-      } else {
-        console.log(`${heroe.nombre} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
-      }
-    } else {
-      console.log(`Necesitas ser nivel ${this.nivel} para usar esta habilidad.`);
+    if (this.verificarAcceso(heroe)) {
+      this.efecto(heroe);
     }
   }
+
+  private verificarAcceso(heroe: Heroe): boolean {
+    if (heroe.nivel < this.nivel) {
+      console.log(`Necesitas ser nivel ${this.nivel} para usar esta habilidad.`);
+      return false;
+    }
+    
+    if (!(heroe instanceof this.usuario.constructor)) {
+      console.log(`${heroe.nombre} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
+      return false;
+    }
+
+    return true;
+  }
 }
+
+//CODEAR QUE AL ABRIR UNA CAJA DESBLOQUEA UNA HABILIDAD NUEVA USABLE AL NV 1
