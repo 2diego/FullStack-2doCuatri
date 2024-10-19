@@ -4,10 +4,10 @@ Descripción
 Juego por turnos donde el jugador elige un héroe entre diferentes clases disponibles para enfrentarse a un enemigo controlado por la CPU.
 
 Clases de Héroes Disponibles
-Luchador: ataques físicos fuertes y defensa física.
-Mago: ataques mágicos y defensa mágica.
-Arquero: equilibrado.
-Brujo: defensivo, reduce stats del oponente.
+  Luchador: ataques físicos fuertes y defensa física.
+  Mago: ataques mágicos y defensa mágica.
+  Arquero: equilibrado.
+  Brujo: defensivo, reduce stats del oponente.
 
 Mecánica del Combate
 El combate ocurre por turnos, donde el jugador y la CPU alternan acciones. En cada turno, los jugadores pueden:
