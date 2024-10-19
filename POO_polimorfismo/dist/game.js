@@ -28,7 +28,6 @@ var Luchador_1 = require("./Luchador");
 var Mago_1 = require("./Mago");
 var Arquero_1 = require("./Arquero");
 var readlineSync = __importStar(require("readline-sync"));
-// AGREGAR OPCIONES DE EXIT, EXPERIENCIA Y LVLUP
 function game() {
     var nombre = readlineSync.question("Ingresa tu nombre: ");
     // Setup jugador
@@ -78,9 +77,9 @@ function game() {
         while (player.vida > 0 && cpu.vida > 0) {
             // Turno del jugador
             console.log("\n--- Turno de ".concat(player.nombre, " ---"));
-            var accionJugador = Number(readlineSync.question("\n\n        Elige una accion:\n        1. Ataque fisico\n        2. Ataque magico\n        3. Defensa fisica\n        4. Defensa magica\n        5. Curarse\n        Ingresa el numero de tu accion: "));
-            while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 5) {
-                console.log("\nError: Debes ingresar un numero valido entre 1 y 5.");
+            var accionJugador = Number(readlineSync.question("\n\n        Elige una accion:\n        1. Ataque fisico\n        2. Ataque magico\n        3. Defensa fisica\n        4. Defensa magica\n        5. Curarse\n        6. Usar una habilidad\n        Ingresa el numero de tu accion: "));
+            while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 6) {
+                console.log("\nError: Debes ingresar un numero valido entre 1 y 6.");
                 accionJugador = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
             }
             switch (accionJugador) {
@@ -103,6 +102,10 @@ function game() {
                 case 5:
                     console.log("\nEl jugador se cura");
                     player.curar();
+                    break;
+                case 6:
+                    console.log("\nElige una habilidad:");
+                    player.usarHabilidad(player, cpu);
                     break;
                 default:
                     throw new Error("\nError inesperado al seleccionar accion del jugador.");
@@ -150,7 +153,7 @@ function game() {
                 }
                 else {
                     process.exit();
-                } // AGREGAR VALIDACION
+                }
             }
             // Mostrar la vida restante de ambos personajes
             console.log("\nVida de ".concat(player.nombre, ": ").concat(player.vida));

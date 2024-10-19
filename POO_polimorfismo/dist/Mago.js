@@ -17,26 +17,33 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Mago = void 0;
 var Heroe_1 = require("./Heroe");
+var habilidadesMago_1 = require("./habilidadesMago");
 var Mago = /** @class */ (function (_super) {
     __extends(Mago, _super);
     function Mago(nuevoNombre) {
         var _this = _super.call(this, nuevoNombre) || this;
+        _this.habilidades = [];
         _this.vida = 100;
         _this.atkFisico = 0;
         _this.atkMagico = 10;
         _this.defFisica = 10;
         _this.defMagica = 20;
+        _this.habilidades = [habilidadesMago_1.EnfocarDefensa, habilidadesMago_1.BolaDeFuego];
+        habilidadesMago_1.EnfocarDefensa.usuario = _this;
+        habilidadesMago_1.BolaDeFuego.usuario = _this;
         return _this;
     }
     Mago.prototype.ataqueMagico = function (heroe) {
         var dmg = this.atkMagico * (1 - (heroe.defMagica / 100));
         heroe.vida -= dmg;
         console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
+        this.sumarExperiencia(dmg);
     };
     Mago.prototype.ataqueFisico = function (heroe) {
         var dmg = this.atkFisico * (1 - (heroe.defFisica / 100));
         heroe.vida -= dmg;
         console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
+        this.sumarExperiencia(dmg);
     };
     Mago.prototype.defensaMagica = function () {
         this.defMagica = this.defMagica * 1.20;
@@ -49,6 +56,15 @@ var Mago = /** @class */ (function (_super) {
     Mago.prototype.curar = function () {
         this.vida += 20;
         console.log("".concat(this.nombre, " se curo 20 puntos de vida"));
+    };
+    Mago.prototype.usarHabilidad = function (heroe, target) {
+        var random = Math.floor(Math.random() * this.habilidades.length);
+        if (this.habilidades[random].tipo == "Defensa") {
+            this.habilidades[random].habilidadDef(heroe);
+        }
+        else {
+            this.habilidades[random].habilidadAtk(heroe, target);
+        }
     };
     return Mago;
 }(Heroe_1.Heroe));

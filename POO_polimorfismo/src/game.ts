@@ -70,10 +70,11 @@ export function game(): void {
         3. Defensa fisica
         4. Defensa magica
         5. Curarse
+        6. Usar una habilidad
         Ingresa el numero de tu accion: `));
 
-      while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 5) {
-        console.log("\nError: Debes ingresar un numero valido entre 1 y 5.");
+      while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 6) {
+        console.log("\nError: Debes ingresar un numero valido entre 1 y 6.");
         accionJugador = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
       }
 
@@ -98,6 +99,10 @@ export function game(): void {
           console.log("\nEl jugador se cura");
           player.curar();
           break;
+        case 6:
+          console.log("\nElige una habilidad:");
+          player.usarHabilidad(player, cpu);
+          break;
         default:
           throw new Error("\nError inesperado al seleccionar accion del jugador.");
       }
@@ -112,7 +117,7 @@ export function game(): void {
 
       // Turno de la CPU
       console.log(`\n--- Turno de ${cpu.nombre} ---`);
-      let accionCPU: number = Math.floor(Math.random() * 5) + 1;
+      let accionCPU: number = Math.floor(Math.random() * 6) + 1;
 
       switch (accionCPU) {
         case 1:
@@ -134,6 +139,10 @@ export function game(): void {
         case 5:
           console.log("\nLa CPU se cura");
           cpu.curar();
+          break;
+        case 6:
+          console.log("\nLa CPU usa una habilidad");
+          cpu.usarHabilidad(cpu, player);
           break;
         default:
           throw new Error("\nError inesperado al seleccionar accion del CPU.");
