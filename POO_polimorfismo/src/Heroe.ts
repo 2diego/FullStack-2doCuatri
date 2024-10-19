@@ -22,6 +22,8 @@ export abstract class Heroe {
 
  abstract curar(): void;
 
+ abstract usarHabilidad(heroe: Heroe, target?: Heroe): void;
+
  public sumarExperiencia(dmg: number): void {
   this.experiencia += dmg;
   console.log(`${this.nombre} ha ganado ${dmg} puntos de experiencia. Experiencia total: ${this.experiencia}`);
