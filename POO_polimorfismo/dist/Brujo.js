@@ -15,50 +15,50 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Luchador = void 0;
+exports.Brujo = void 0;
 var Heroe_1 = require("./Heroe");
-var habilidadesLuchador_1 = require("./habilidadesLuchador");
-var Luchador = /** @class */ (function (_super) {
-    __extends(Luchador, _super);
-    function Luchador(nuevoNombre) {
+var habilidadesBrujo_1 = require("./habilidadesBrujo");
+var Brujo = /** @class */ (function (_super) {
+    __extends(Brujo, _super);
+    function Brujo(nuevoNombre) {
         var _this = _super.call(this, nuevoNombre) || this;
         _this.habilidades = [];
-        _this.vida = 100;
-        _this.atkFisico = 25;
-        _this.atkMagico = 0;
-        _this.defFisica = 15;
-        _this.defMagica = 5;
-        _this.habilidades = [habilidadesLuchador_1.EnfocarDefensa, habilidadesLuchador_1.LanzaRocas];
-        habilidadesLuchador_1.EnfocarDefensa.usuario = _this;
-        habilidadesLuchador_1.LanzaRocas.usuario = _this;
-        habilidadesLuchador_1.Meditacion.usuario = _this;
+        _this.vida = 50;
+        _this.atkFisico = 1;
+        _this.atkMagico = 1;
+        _this.defFisica = 20;
+        _this.defMagica = 20;
+        _this.habilidades = [habilidadesBrujo_1.EnfocarDefensa, habilidadesBrujo_1.Maldecir];
+        habilidadesBrujo_1.EnfocarDefensa.usuario = _this;
+        habilidadesBrujo_1.Maldecir.usuario = _this;
+        habilidadesBrujo_1.Meditacion.usuario = _this;
         return _this;
     }
-    Luchador.prototype.ataqueMagico = function (heroe) {
+    Brujo.prototype.ataqueMagico = function (heroe) {
         var dmg = this.atkMagico * (1 - (heroe.defMagica / 100));
         heroe.vida -= dmg;
         console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
         this.sumarExperiencia(dmg);
     };
-    Luchador.prototype.ataqueFisico = function (heroe) {
+    Brujo.prototype.ataqueFisico = function (heroe) {
         var dmg = this.atkFisico * (1 - (heroe.defFisica / 100));
         heroe.vida -= dmg;
         console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
         this.sumarExperiencia(dmg);
     };
-    Luchador.prototype.defensaMagica = function () {
+    Brujo.prototype.defensaMagica = function () {
         this.defMagica = this.defMagica * 1.20;
         console.log("".concat(this.nombre, " aumento su defensa magica un 20%"));
     };
-    Luchador.prototype.defensaFisica = function () {
+    Brujo.prototype.defensaFisica = function () {
         this.defFisica = this.defFisica * 1.20;
         console.log("".concat(this.nombre, " aumento su defensa fisica un 20%"));
     };
-    Luchador.prototype.curar = function () {
+    Brujo.prototype.curar = function () {
         this.vida += 20;
-        console.log("".concat(this.nombre, " se curo 10 puntos de vida"));
+        console.log("".concat(this.nombre, " se curo 40 puntos de vida"));
     };
-    Luchador.prototype.usarHabilidad = function (heroe, target) {
+    Brujo.prototype.usarHabilidad = function (heroe, target) {
         var random = Math.floor(Math.random() * this.habilidades.length);
         if (this.habilidades[random].tipo == "Defensa") {
             this.habilidades[random].habilidadDef(heroe);
@@ -67,6 +67,6 @@ var Luchador = /** @class */ (function (_super) {
             this.habilidades[random].habilidadAtk(heroe, target);
         }
     };
-    return Luchador;
+    return Brujo;
 }(Heroe_1.Heroe));
-exports.Luchador = Luchador;
+exports.Brujo = Brujo;

@@ -31,6 +31,7 @@ var Arquero = /** @class */ (function (_super) {
         _this.habilidades = [habilidadesArquero_1.EnfocarDefensa, habilidadesArquero_1.FlechaPesada];
         habilidadesArquero_1.EnfocarDefensa.usuario = _this;
         habilidadesArquero_1.FlechaPesada.usuario = _this;
+        habilidadesArquero_1.Meditacion.usuario = _this;
         return _this;
     }
     Arquero.prototype.ataqueMagico = function (heroe) {

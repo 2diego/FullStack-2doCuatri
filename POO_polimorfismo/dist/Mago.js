@@ -25,12 +25,13 @@ var Mago = /** @class */ (function (_super) {
         _this.habilidades = [];
         _this.vida = 100;
         _this.atkFisico = 0;
-        _this.atkMagico = 10;
-        _this.defFisica = 10;
+        _this.atkMagico = 20;
+        _this.defFisica = 7;
         _this.defMagica = 20;
         _this.habilidades = [habilidadesMago_1.EnfocarDefensa, habilidadesMago_1.BolaDeFuego];
         habilidadesMago_1.EnfocarDefensa.usuario = _this;
         habilidadesMago_1.BolaDeFuego.usuario = _this;
+        habilidadesMago_1.Meditacion.usuario = _this;
         return _this;
     }
     Mago.prototype.ataqueMagico = function (heroe) {

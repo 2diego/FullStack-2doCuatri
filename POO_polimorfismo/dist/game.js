@@ -27,14 +27,15 @@ exports.game = void 0;
 var Luchador_1 = require("./Luchador");
 var Mago_1 = require("./Mago");
 var Arquero_1 = require("./Arquero");
+var Brujo_1 = require("./Brujo");
 var readlineSync = __importStar(require("readline-sync"));
 function game() {
     var nombre = readlineSync.question("Ingresa tu nombre: ");
     // Setup jugador
     function playerClase() {
-        var clase = Number(readlineSync.question("\n      Clases disponibles:\n    1. Luchador\n    2. Mago\n    3. Arquero\n    Ingresa el numero de la clase de tu personaje: "));
-        while (isNaN(clase) || clase < 1 || clase > 3) {
-            console.log("\nError: Debes ingresar un número valido entre 1 y 3.");
+        var clase = Number(readlineSync.question("\n      Clases disponibles:\n    1. Luchador\n    2. Mago\n    3. Arquero\n    4. Brujo\n    Ingresa el numero de la clase de tu personaje: "));
+        while (isNaN(clase) || clase < 1 || clase > 4) {
+            console.log("\nError: Debes ingresar un número valido entre 1 y 4.");
             clase = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
         }
         switch (clase) {
@@ -47,6 +48,9 @@ function game() {
             case 3:
                 console.log("\nHas elegido arquero");
                 return new Arquero_1.Arquero(nombre);
+            case 4:
+                console.log("\nHas elegido brujo");
+                return new Brujo_1.Brujo(nombre);
             default:
                 throw new Error("\nError inesperado al seleccionar clase de jugador.");
         }
@@ -55,7 +59,7 @@ function game() {
     var player = playerClase();
     // Setup CPU
     function cpuClase() {
-        var random = Math.floor(Math.random() * 3) + 1;
+        var random = Math.floor(Math.random() * 4) + 1;
         switch (random) {
             case 1:
                 console.log("\nLa CPU ha elegido luchador");
@@ -66,6 +70,9 @@ function game() {
             case 3:
                 console.log("\nLa CPU ha elegido arquero");
                 return new Arquero_1.Arquero("CPU_Arquero");
+            case 4:
+                console.log("\nLa CPU ha elegido brujo");
+                return new Brujo_1.Brujo("CPU_Brujo");
             default:
                 throw new Error("\nError inesperado al asignar clase a la CPU.");
         }
@@ -119,7 +126,7 @@ function game() {
             }
             // Turno de la CPU
             console.log("\n--- Turno de ".concat(cpu.nombre, " ---"));
-            var accionCPU = Math.floor(Math.random() * 5) + 1;
+            var accionCPU = Math.floor(Math.random() * 6) + 1;
             switch (accionCPU) {
                 case 1:
                     console.log("\nLa CPU realiza un ataque fisico");
@@ -140,6 +147,10 @@ function game() {
                 case 5:
                     console.log("\nLa CPU se cura");
                     cpu.curar();
+                    break;
+                case 6:
+                    console.log("\nLa CPU usa una habilidad");
+                    cpu.usarHabilidad(cpu, player);
                     break;
                 default:
                     throw new Error("\nError inesperado al seleccionar accion del CPU.");
@@ -164,7 +175,8 @@ function game() {
     var ronda = 1;
     while (player.vida > 0) {
         console.log("\n--- Ronda ".concat(ronda, " ---"));
-        var cpu = cpuClase(); // Nueva CPU en cada ronda
+        var cpu = cpuClase();
+        cpu.nivel = ronda;
         combate(player, cpu);
         ronda++;
     }
