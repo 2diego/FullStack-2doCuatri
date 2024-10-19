@@ -5,11 +5,13 @@ import { Arquero } from "./Arquero";
 
 export class Habilidad {
   public nombre: string;
+  public tipo: string;
   public usuario: Mago | Arquero | Luchador;
   private efecto: (heroe?: Heroe, target?: Heroe) => void;
   public nivel: number;
-  constructor(nuevaHabilidad: string, nuevoUsuario: Mago | Arquero | Luchador, nuevoEfecto: (heroe?: Heroe, target?: Heroe) => void, nivelMinimo: number) {
+  constructor(nuevaHabilidad: string, nuevoTipo: string, nuevoUsuario: Mago | Arquero | Luchador, nuevoEfecto: (heroe?: Heroe, target?: Heroe) => void, nivelMinimo: number) {
     this.nombre = nuevaHabilidad;
+    this.tipo = nuevoTipo; 
     this.usuario = nuevoUsuario;
     this.efecto = nuevoEfecto;
     this.nivel = nivelMinimo
