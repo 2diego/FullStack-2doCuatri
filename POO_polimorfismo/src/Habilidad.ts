@@ -2,14 +2,15 @@ import { Heroe } from "./Heroe";
 import { Luchador } from "./Luchador";
 import { Mago } from "./Mago";
 import { Arquero } from "./Arquero";
+import { Brujo } from "./Brujo";
 
 export class Habilidad {
   public nombre: string;
   public tipo: string;
-  public usuario: Mago | Arquero | Luchador;
+  public usuario: Mago | Arquero | Luchador | Brujo;
   private efecto: (heroe?: Heroe, target?: Heroe) => void;
   public nivel: number;
-  constructor(nuevaHabilidad: string, nuevoTipo: string, nuevoUsuario: Mago | Arquero | Luchador, nuevoEfecto: (heroe?: Heroe, target?: Heroe) => void, nivelMinimo: number) {
+  constructor(nuevaHabilidad: string, nuevoTipo: string, nuevoUsuario: Mago | Arquero | Luchador | Brujo, nuevoEfecto: (heroe?: Heroe, target?: Heroe) => void, nivelMinimo: number) {
     this.nombre = nuevaHabilidad;
     this.tipo = nuevoTipo; 
     this.usuario = nuevoUsuario;

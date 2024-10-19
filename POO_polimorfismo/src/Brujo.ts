@@ -1,20 +1,20 @@
 import { Heroe } from "./Heroe";
 import { Habilidad } from "./Habilidad";
-import { EnfocarDefensa, LanzaRocas, Meditacion } from "./habilidadesLuchador";
+import { EnfocarDefensa, Maldecir, Meditacion } from "./habilidadesBrujo";
 
-export class Luchador extends Heroe {
+export class Brujo extends Heroe {
   public habilidades: Habilidad[] = [];
   constructor(nuevoNombre: string) {
     super(nuevoNombre);
-    this.vida = 100;
-    this.atkFisico = 25;
-    this.atkMagico = 0;
-    this.defFisica = 15;
-    this.defMagica = 5;
-    this.habilidades = [EnfocarDefensa, LanzaRocas];
+    this.vida = 50;
+    this.atkFisico = 1;
+    this.atkMagico = 1;
+    this.defFisica = 20;
+    this.defMagica = 20;
+    this.habilidades = [EnfocarDefensa, Maldecir];
 
     EnfocarDefensa.usuario = this;
-    LanzaRocas.usuario = this;
+    Maldecir.usuario = this;
     Meditacion.usuario = this;
   }
   public ataqueMagico(heroe: Heroe): void {
@@ -39,7 +39,7 @@ export class Luchador extends Heroe {
   }
   public curar(): void {
     this.vida += 20;
-    console.log(`${this.nombre} se curo 10 puntos de vida`);
+    console.log(`${this.nombre} se curo 40 puntos de vida`);
   }
 
   public usarHabilidad(heroe: Heroe, target?: Heroe): void {

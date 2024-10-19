@@ -1,6 +1,6 @@
 import { Heroe } from "./Heroe";
 import { Habilidad } from "./Habilidad";
-import { EnfocarDefensa, FlechaPesada } from "./habilidadesArquero";
+import { EnfocarDefensa, FlechaPesada, Meditacion } from "./habilidadesArquero";
 
 export class Arquero extends Heroe {
   public habilidades: Habilidad[] = [];
@@ -15,6 +15,7 @@ export class Arquero extends Heroe {
 
     EnfocarDefensa.usuario = this;
     FlechaPesada.usuario = this;
+    Meditacion.usuario = this;
   }
   public ataqueMagico(heroe: Heroe): void {
     let dmg = this.atkMagico * (1 - (heroe.defMagica/100))

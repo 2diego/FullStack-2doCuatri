@@ -2,6 +2,7 @@ import { Heroe } from "./Heroe";
 import { Luchador } from "./Luchador";
 import { Mago } from "./Mago";
 import { Arquero } from "./Arquero";
+import { Brujo } from "./Brujo";
 import * as readlineSync from 'readline-sync';
 
 export function game(): void {
@@ -15,10 +16,11 @@ export function game(): void {
     1. Luchador
     2. Mago
     3. Arquero
+    4. Brujo
     Ingresa el numero de la clase de tu personaje: `));
 
-    while (isNaN(clase) || clase < 1 || clase > 3) {
-      console.log("\nError: Debes ingresar un número valido entre 1 y 3.");
+    while (isNaN(clase) || clase < 1 || clase > 4) {
+      console.log("\nError: Debes ingresar un número valido entre 1 y 4.");
       clase = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
     }
 
@@ -32,6 +34,9 @@ export function game(): void {
       case 3:
         console.log("\nHas elegido arquero");
         return new Arquero(nombre);
+      case 4:
+        console.log("\nHas elegido brujo");
+        return new Brujo(nombre);
       default:
         throw new Error("\nError inesperado al seleccionar clase de jugador.");
     }
@@ -40,7 +45,7 @@ export function game(): void {
 
   // Setup CPU
   function cpuClase(): Heroe {
-    let random: number = Math.floor(Math.random() * 3) + 1;
+    let random: number = Math.floor(Math.random() * 4) + 1;
     switch (random) {
       case 1:
         console.log("\nLa CPU ha elegido luchador");
@@ -51,6 +56,9 @@ export function game(): void {
       case 3:
         console.log("\nLa CPU ha elegido arquero");
         return new Arquero("CPU_Arquero");
+      case 4:
+        console.log("\nLa CPU ha elegido brujo");
+        return new Brujo("CPU_Brujo");
       default:
         throw new Error("\nError inesperado al asignar clase a la CPU.");
     }
@@ -169,7 +177,8 @@ export function game(): void {
   let ronda: number = 1;
   while (player.vida > 0) {
     console.log(`\n--- Ronda ${ronda} ---`);
-    let cpu: Heroe = cpuClase(); // Nueva CPU en cada ronda
+    let cpu: Heroe = cpuClase();
+    cpu.nivel = ronda;
     combate(player, cpu);
     ronda++;
   }

@@ -1,6 +1,6 @@
 import { Heroe } from "./Heroe";
 import { Habilidad } from "./Habilidad";
-import { EnfocarDefensa, BolaDeFuego } from "./habilidadesMago";
+import { EnfocarDefensa, BolaDeFuego, Meditacion } from "./habilidadesMago";
 
 export class Mago extends Heroe {
   public habilidades: Habilidad[] = [];
@@ -8,13 +8,14 @@ export class Mago extends Heroe {
     super(nuevoNombre);
     this.vida = 100;
     this.atkFisico = 0;
-    this.atkMagico = 10;
-    this.defFisica = 10;
+    this.atkMagico = 20;
+    this.defFisica = 7;
     this.defMagica = 20;
     this.habilidades = [EnfocarDefensa, BolaDeFuego];
 
     EnfocarDefensa.usuario = this;
     BolaDeFuego.usuario = this;
+    Meditacion.usuario = this;
   }
   public ataqueMagico(heroe: Heroe): void {
     let dmg = this.atkMagico * (1 - (heroe.defMagica/100))

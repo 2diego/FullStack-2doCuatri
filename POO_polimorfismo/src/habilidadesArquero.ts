@@ -40,3 +40,18 @@ export const FlechaPesada = new Habilidad(
   },
   2
 );
+
+export const Meditacion = new Habilidad(
+  "Meditacion",
+  "Defensa",
+  null,
+  (heroe: Heroe) => {
+    heroe.vida += 30;
+    heroe.atkMagico += 5;
+    heroe.defMagica += 5;
+    heroe.atkFisico += 5;
+    heroe.defFisica += 5;
+    console.log(`${heroe.nombre} subio 5pts en todos sus stats y recupero 30 puntos de vida.`);
+  },
+  3
+);
