@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
           name: pokemon.name,
           image: pokemon.sprites.other["official-artwork"].front_default,
           id: pokemon.id,
+          height: pokemon.height,
+          weight: pokemon.weight,
           types: types
         };
       }));
@@ -89,7 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="dorso"><img src="imagenes/pokedorso.jpg" alt="dorso carta"></div>
         <div class="frente">
           <div class="top-container">
-            <p class="number">#${pokeID(pokemon.id)}</p>
+            <span class="number">#${pokeID(pokemon.id)}</span>
+            <div class="stats">
+              <span class="altura">${pokemon.height / 10} M</span>
+              <span class="peso">${pokemon.weight / 10} Kg</span>
+            </div>
           </div>
           <img class="poke-img" src="${pokemon.image}" alt="${pokemon.name}">
           <p class="poke-name">${pokemon.name.toUpperCase()}</p>
