@@ -30,10 +30,10 @@ var Arquero_1 = require("./Arquero");
 var Brujo_1 = require("./Brujo");
 var readlineSync = __importStar(require("readline-sync"));
 function game() {
-    var nombre = readlineSync.question("Ingresa tu nombre: ");
+    var nombre = readlineSync.question("\nIngresa tu nombre: ");
     // Setup jugador
     function playerClase() {
-        var clase = Number(readlineSync.question("\n      Clases disponibles:\n    1. Luchador\n    2. Mago\n    3. Arquero\n    4. Brujo\n    Ingresa el numero de la clase de tu personaje: "));
+        var clase = Number(readlineSync.question("\n  Clases disponibles:\n    1. Luchador\n    2. Mago\n    3. Arquero\n    4. Brujo\n  Ingresa el numero de la clase de tu personaje: "));
         while (isNaN(clase) || clase < 1 || clase > 4) {
             console.log("\nError: Debes ingresar un número valido entre 1 y 4.");
             clase = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
@@ -62,16 +62,16 @@ function game() {
         var random = Math.floor(Math.random() * 4) + 1;
         switch (random) {
             case 1:
-                console.log("\nLa CPU ha elegido luchador");
+                console.log("La CPU ha elegido luchador");
                 return new Luchador_1.Luchador("CPU_Luchador");
             case 2:
-                console.log("\nLa CPU ha elegido mago");
+                console.log("La CPU ha elegido mago");
                 return new Mago_1.Mago("CPU_Mago");
             case 3:
-                console.log("\nLa CPU ha elegido arquero");
+                console.log("La CPU ha elegido arquero");
                 return new Arquero_1.Arquero("CPU_Arquero");
             case 4:
-                console.log("\nLa CPU ha elegido brujo");
+                console.log("La CPU ha elegido brujo");
                 return new Brujo_1.Brujo("CPU_Brujo");
             default:
                 throw new Error("\nError inesperado al asignar clase a la CPU.");
@@ -80,11 +80,11 @@ function game() {
     ;
     // Combate por turnos
     function combate(player, cpu) {
-        console.log("\n".concat(player.nombre, " se enfrentara a ").concat(cpu.nombre, "... "));
-        while (player.vida > 0 && cpu.vida > 0) {
+        console.log("\n".concat(player.getName(), " se enfrentara a ").concat(cpu.getName(), "... "));
+        while (player.getVida() > 0 && cpu.getVida() > 0) {
             // Turno del jugador
-            console.log("\n--- Turno de ".concat(player.nombre, " ---"));
-            var accionJugador = Number(readlineSync.question("\n\n        Elige una accion:\n        1. Ataque fisico\n        2. Ataque magico\n        3. Defensa fisica\n        4. Defensa magica\n        5. Curarse\n        6. Usar una habilidad\n        Ingresa el numero de tu accion: "));
+            console.log("\n--- Turno de ".concat(player.getName(), " (").concat(player.getVida(), "HP) ---"));
+            var accionJugador = Number(readlineSync.question("Elige una accion:\n          1. Realizar ataque fisico                                       --".concat(player.getNombreAtkFisico(), " (Puntos de ataque fisico: ").concat(player.getAtkFisico(), ")\n          2. Realizar ataque magico                                       --").concat(player.getNombreAtkMagico(), " (Puntos de ataque magico: ").concat(player.getAtkMagico(), ")\n          3. Aumentar la defensa fisica                                   --Indice de defensa fisica: ").concat(player.getDefFisica(), "\n          4. Aumentar la defensa magica                                   --Indice de defensa magica: ").concat(player.getDefMagica(), "\n          5. Curarse\n          6. Usar una habilidad al azar                                   --Habilidades disponibles: ").concat(player.getHabilidades().join(", "), "\n        Ingresa el numero de tu accion: ")));
             while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 6) {
                 console.log("\nError: Debes ingresar un numero valido entre 1 y 6.");
                 accionJugador = Number(readlineSync.question("\nPor favor, elige nuevamente: "));
@@ -118,12 +118,12 @@ function game() {
                     throw new Error("\nError inesperado al seleccionar accion del jugador.");
             }
             // Verificar si la CPU ha sido derrotada
-            if (cpu.vida <= 0) {
-                console.log("\n".concat(cpu.nombre, " ha sido derrotado. \u00A1Has ganado esta ronda!"));
-                if (player.abrioCaja === false) {
+            if (cpu.getVida() <= 0) {
+                console.log("\n".concat(cpu.getName(), " ha sido derrotado. \u00A1Has ganado esta ronda!"));
+                if (player.getAbrioCaja() === false) {
                     var ganarCaja = Math.floor(Math.random() * 10) + 1;
                     if (ganarCaja > 7) {
-                        console.log("\n".concat(cpu.nombre, " ha dropeado una caja!"));
+                        console.log("\n".concat(cpu.getName(), " ha dropeado una caja!"));
                         player.abrirCaja();
                     }
                 }
@@ -132,7 +132,7 @@ function game() {
                 return;
             }
             // Turno de la CPU
-            console.log("\n--- Turno de ".concat(cpu.nombre, " ---"));
+            console.log("\n--- Turno de ".concat(cpu.getName(), " ---"));
             var accionCPU = Math.floor(Math.random() * 6) + 1;
             switch (accionCPU) {
                 case 1:
@@ -163,8 +163,8 @@ function game() {
                     throw new Error("\nError inesperado al seleccionar accion del CPU.");
             }
             // Verificar si el jugador ha sido derrotado
-            if (player.vida <= 0) {
-                console.log("\n".concat(player.nombre, " ha sido derrotado. \u00BFDeseas jugar de nuevo? (S/N)"));
+            if (player.getVida() <= 0) {
+                console.log("\n".concat(player.getName(), " ha sido derrotado. \u00BFDeseas jugar de nuevo? (S/N)"));
                 var reiniciar = readlineSync.question("\nIngresa S para jugar de nuevo o N para salir: ").toUpperCase();
                 if (reiniciar === 'S') {
                     game();
@@ -174,16 +174,16 @@ function game() {
                 }
             }
             // Mostrar la vida restante de ambos personajes
-            console.log("\nVida de ".concat(player.nombre, ": ").concat(player.vida));
-            console.log("\nVida de ".concat(cpu.nombre, ": ").concat(cpu.vida));
+            console.log("\nVida de ".concat(player.getName(), ": ").concat(player.getVida()));
+            console.log("\nVida de ".concat(cpu.getName(), ": ").concat(cpu.getVida()));
         }
     }
     // Iniciar la primera ronda
     var ronda = 1;
-    while (player.vida > 0) {
-        console.log("\n--- Ronda ".concat(ronda, " ---"));
+    while (player.getVida() > 0) {
         var cpu = cpuClase();
-        cpu.nivel = ronda;
+        cpu.setNivel(ronda);
+        console.log("\n--- Ronda ".concat(ronda, " ---"));
         combate(player, cpu);
         ronda++;
     }

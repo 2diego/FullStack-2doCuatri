@@ -3,8 +3,8 @@ export abstract class Heroe {
   private nivel: number = 1;
   private experiencia: number = 0;
   private vida: number;
-  private atkFisico: number;
-  private atkMagico: number;
+  private atkFisico: {puntos: number, name: string} = { puntos: 0, name: "Ataque Fisico" };
+  private atkMagico: {puntos: number, name: string} = { puntos: 0, name: "Ataque Magico" };
   private defFisica: number; //porcentaje
   private defMagica: number; //porcentaje
   private abrioCaja: boolean = false;
@@ -27,11 +27,19 @@ public getVida(): number {
 }
 
 public getAtkFisico(): number {
-  return this.atkFisico
+  return this.atkFisico.puntos
+}
+
+public getNombreAtkFisico(): string {
+  return this.atkFisico.name
 }
 
 public getAtkMagico(): number {
-  return this.atkMagico
+  return this.atkMagico.puntos
+}
+
+public getNombreAtkMagico(): string {
+  return this.atkMagico.name
 }
 
 public getDefFisica(): number {
@@ -55,12 +63,14 @@ public setVida(nuevaVida: number): void {
   this.vida = nuevaVida;
 }
 
-public setAtkFisico(nuevoAtkFisico: number): void {
-  this.atkFisico = nuevoAtkFisico;
+public setAtkFisico(puntos: number, name?: string): void {
+  this.atkFisico.puntos = puntos;
+    this.atkFisico.name = name;
 }
 
-public setAtkMagico(nuevoAtkMagico: number): void {
-  this.atkMagico = nuevoAtkMagico;
+public setAtkMagico(puntos: number, name?: string): void {
+  this.atkMagico.puntos = puntos;
+    this.atkMagico.name = name;
 }
 
 public setDefFisica(nuevoDefFisica: number): void {

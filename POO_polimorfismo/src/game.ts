@@ -72,12 +72,12 @@ export function game(): void {
       // Turno del jugador
       console.log(`\n--- Turno de ${player.getName()} (${player.getVida()}HP) ---`);
       let accionJugador: number = Number(readlineSync.question(`Elige una accion:
-          1. Realizar un ataque fisico    --Puntos de ataque fisico: ${player.getAtkFisico()}
-          2. Realizar un ataque magico    --Puntos de ataque magico: ${player.getAtkMagico()}
-          3. Aumentar la defensa fisica   --Indice de defensa fisica: ${player.getDefFisica()}
-          4. Aumentar la defensa magica   --Indice de defensa magica: ${player.getDefMagica()}
+          1. Realizar ataque fisico                                       --${player.getNombreAtkFisico()} (Puntos de ataque fisico: ${player.getAtkFisico()})
+          2. Realizar ataque magico                                       --${player.getNombreAtkMagico()} (Puntos de ataque magico: ${player.getAtkMagico()})
+          3. Aumentar la defensa fisica                                   --Indice de defensa fisica: ${player.getDefFisica()}
+          4. Aumentar la defensa magica                                   --Indice de defensa magica: ${player.getDefMagica()}
           5. Curarse
-          6. Usar una habilidad al azar   --Habilidades disponibles: ${player.getHabilidades().join(", ")}
+          6. Usar una habilidad al azar                                   --Habilidades disponibles: ${player.getHabilidades().join(", ")}
         Ingresa el numero de tu accion: `));
 
       while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 6) {

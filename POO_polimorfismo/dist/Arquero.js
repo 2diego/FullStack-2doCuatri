@@ -24,44 +24,48 @@ var Arquero = /** @class */ (function (_super) {
     function Arquero(nuevoNombre) {
         var _this = _super.call(this, nuevoNombre) || this;
         _this.habilidades = [];
-        _this.vida = 150;
-        _this.atkFisico = 20;
-        _this.atkMagico = 10;
-        _this.defFisica = 5;
-        _this.defMagica = 5;
+        _this.setVida(150);
+        _this.setAtkFisico(20, "Flecha certera");
+        _this.setAtkMagico(8, "Lluvia de flechas");
+        _this.setDefFisica(50);
+        _this.setDefMagica(10);
         _this.habilidades = [habilidadesArquero_1.EnfocarDefensa, habilidadesArquero_1.FlechaPesada];
-        habilidadesArquero_1.EnfocarDefensa.usuario = _this;
-        habilidadesArquero_1.FlechaPesada.usuario = _this;
-        habilidadesArquero_1.Meditacion.usuario = _this;
+        habilidadesArquero_1.EnfocarDefensa.setUsuario(_this);
+        habilidadesArquero_1.FlechaPesada.setUsuario(_this);
+        habilidadesArquero_1.Meditacion.setUsuario(_this);
         return _this;
     }
-    Arquero.prototype.ataqueMagico = function (heroe) {
-        var dmg = this.atkMagico * (1 - (heroe.defMagica / 100));
-        heroe.vida -= dmg;
-        console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
+    Arquero.prototype.getHabilidades = function () {
+        return this.habilidades.map(function (hab) { return hab.getNombre(); });
+    };
+    Arquero.prototype.ataqueFisico = function (target) {
+        var dmg = this.getAtkFisico() * (1 - (target.getDefFisica() / 100));
+        target.setVida(target.getVida() - dmg);
+        console.log("".concat(target.getName(), " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.getName()));
         this.sumarExperiencia(dmg);
     };
-    Arquero.prototype.ataqueFisico = function (heroe) {
-        var dmg = this.atkFisico * (1 - (heroe.defFisica / 100));
-        heroe.vida -= dmg;
-        console.log("".concat(heroe.nombre, " recibio un ataque de ").concat(dmg, " puntos de vida de ").concat(this.nombre));
+    Arquero.prototype.ataqueMagico = function (target) {
+        var repetir = Math.floor(Math.random() * 3) + 1;
+        var dmg = (this.getAtkMagico() * (1 - (target.getDefFisica() / 100))) * repetir;
+        target.setVida(target.getVida() - dmg);
+        console.log("".concat(target.getName(), " recibio un ataque de ").concat(repetir, " flecha/s por un total de ").concat(dmg, " puntos de vida de ").concat(this.getName()));
         this.sumarExperiencia(dmg);
     };
     Arquero.prototype.defensaMagica = function () {
-        this.defMagica = this.defMagica * 1.20;
-        console.log("".concat(this.nombre, " aumento su defensa magica un 20%"));
+        this.setDefMagica(this.getDefMagica() * 1.20);
+        console.log("".concat(this.getName(), " aumento su indice de defensa magica un 20%"));
     };
     Arquero.prototype.defensaFisica = function () {
-        this.defFisica = this.defFisica * 1.20;
-        console.log("".concat(this.nombre, " aumento su defensa fisica un 20%"));
+        this.setDefFisica(this.getDefFisica() * 1.20);
+        console.log("".concat(this.getName(), " aumento su indice de defensa fisica un 20%"));
     };
     Arquero.prototype.curar = function () {
-        this.vida += 20;
-        console.log("".concat(this.nombre, " se curo 20 puntos de vida"));
+        this.setVida(this.getVida() + 30);
+        console.log("".concat(this.getName(), " aumento 30 puntos de vida"));
     };
     Arquero.prototype.usarHabilidad = function (heroe, target) {
         var random = Math.floor(Math.random() * this.habilidades.length);
-        if (this.habilidades[random].tipo == "Defensa") {
+        if (this.habilidades[random].getTipo() == "Defensa") {
             this.habilidades[random].habilidadDef(heroe);
         }
         else {
@@ -73,20 +77,20 @@ var Arquero = /** @class */ (function (_super) {
         switch (nuevaHabilidad) {
             case 1:
                 this.habilidades.push(new Habilidad_1.Habilidad("Juntar flechas", "Defensa", null, function (heroe) {
-                    console.log("".concat(heroe.nombre, " esta juntando flechas, pierde este turno."));
+                    console.log("".concat(heroe.getName(), " esta juntando flechas, pierde este turno."));
                 }, 1));
-                this.abrioCaja = true;
+                this.setAbrioCaja(true);
                 break;
             case 2:
                 this.habilidades.push(new Habilidad_1.Habilidad("Destructor", "Ataque", null, function (target) {
                     var dmg = 60;
-                    target.vida -= dmg;
-                    console.log("".concat(target.nombre, " ha recibido un ataque demasiado fuerte y perdio ").concat(dmg, " puntos de vida."));
+                    target.setVida(target.getVida() - dmg);
+                    console.log("".concat(target.getName(), " ha recibido un ataque demasiado fuerte y perdio ").concat(dmg, " puntos de vida."));
                 }, 2));
-                this.abrioCaja = true;
+                this.setAbrioCaja(true);
                 break;
         }
-        console.log("".concat(this.nombre, " abrio la caja"));
+        console.log("".concat(this.getName(), " abrio la caja"));
     };
     return Arquero;
 }(Heroe_1.Heroe));

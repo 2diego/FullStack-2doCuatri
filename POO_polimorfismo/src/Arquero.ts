@@ -7,9 +7,9 @@ export class Arquero extends Heroe {
   constructor(nuevoNombre: string) {
     super(nuevoNombre);
     this.setVida(150);
-    this.setAtkFisico(20);
-    this.setAtkMagico(10);
-    this.setDefFisica(10);
+    this.setAtkFisico(20, "Flecha certera");
+    this.setAtkMagico(8, "Lluvia de flechas");
+    this.setDefFisica(50);
     this.setDefMagica(10);
     this.habilidades = [EnfocarDefensa, FlechaPesada];
 
@@ -18,29 +18,35 @@ export class Arquero extends Heroe {
     Meditacion.setUsuario(this);
   }
 
-  public getHabilidades(): Habilidad[] {
-    return this.habilidades;
+  public getHabilidades(): String[] {
+    return this.habilidades.map((hab) => hab.getNombre());
   }
-  public ataqueMagico(target: Heroe): void {
-    let dmg = this.getAtkMagico() * (1 - (target.getDefFisica()/100))
-    target.setVida(target.getVida() - dmg);
-    console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
-    this.sumarExperiencia(dmg);
-  }
+
   public ataqueFisico(target: Heroe): void {
-    let dmg = this.getAtkFisico() * (1 - (target.getDefFisica()/100))
+    let dmg: number = this.getAtkFisico() * (1 - (target.getDefFisica()/100))
     target.setVida(target.getVida() - dmg);
     console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
     this.sumarExperiencia(dmg);
   }
+
+  public ataqueMagico(target: Heroe): void {
+    let repetir: number = Math.floor(Math.random() * 3) + 1;
+    let dmg: number = (this.getAtkMagico() * (1 - (target.getDefFisica()/100))) * repetir;
+    target.setVida(target.getVida() - dmg);
+    console.log(`${target.getName()} recibio un ataque de ${repetir} flecha/s por un total de ${dmg} puntos de vida de ${this.getName()}`);
+    this.sumarExperiencia(dmg);
+  }
+
   public defensaMagica() {
     this.setDefMagica(this.getDefMagica() * 1.20);
     console.log(`${this.getName()} aumento su indice de defensa magica un 20%`);
   }
+
   public defensaFisica(): void {
     this.setDefFisica(this.getDefFisica() * 1.20);
     console.log(`${this.getName()} aumento su indice de defensa fisica un 20%`);
   }
+
   public curar(): void {
     this.setVida(this.getVida() + 30);
     console.log(`${this.getName()} aumento 30 puntos de vida`);
@@ -56,7 +62,7 @@ export class Arquero extends Heroe {
   }
 
   public abrirCaja(): void {
-    let nuevaHabilidad = Math.floor(Math.random() * 2) + 1;
+    let nuevaHabilidad: number = Math.floor(Math.random() * 2) + 1;
     switch (nuevaHabilidad) {
       case 1:
         this.habilidades.push(new Habilidad(

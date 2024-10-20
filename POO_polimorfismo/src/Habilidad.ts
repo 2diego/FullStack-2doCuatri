@@ -19,6 +19,10 @@ export class Habilidad {
   }
 
   //GETTERS
+  public getNombre(): string {
+    return this.nombre;
+  }
+  
   public getNivel(): number {
     return this.nivel;
   }

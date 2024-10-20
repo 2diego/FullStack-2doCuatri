@@ -7,10 +7,10 @@ export class Luchador extends Heroe {
   constructor(nuevoNombre: string) {
     super(nuevoNombre);
     this.setVida(100);
-    this.setAtkFisico(25);
-    this.setAtkMagico(0);
-    this.setDefFisica(20);
-    this.setDefMagica(5);
+    this.setAtkFisico(25, "Uppercut");
+    this.setAtkMagico(0, "Golpe energetico destructor");
+    this.setDefFisica(30);
+    this.setDefMagica(10);
     this.habilidades = [EnfocarDefensa, LanzaRocas];
 
     EnfocarDefensa.setUsuario(this);
@@ -18,37 +18,38 @@ export class Luchador extends Heroe {
     Meditacion.setUsuario(this);
   }
 
-  public getHabilidades(): Habilidad[] {
-    return this.habilidades;
+  public getHabilidades(): String[] {
+    return this.habilidades.map((hab) => hab.getNombre());
   }
 
   public ataqueMagico(target: Heroe): void {
-    let dmg = this.getAtkMagico() * (1 - (target.getDefMagica()/100))
-    target.setVida(target.getVida() - dmg);
-    console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
-    this.sumarExperiencia(dmg);
+    console.log(`${this.getName()} se concentra pero no ocurre nada...`);
   }
+
   public ataqueFisico(target: Heroe): void {
-    let dmg = this.getAtkFisico() * (1 - (target.getDefFisica()/100))
+    let dmg: number = this.getAtkFisico() * (1 - (target.getDefFisica()/100))
     target.setVida(target.getVida() - dmg);
     console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
     this.sumarExperiencia(dmg);
   }
+
   public defensaMagica() {
     this.setDefMagica(this.getDefMagica() * 1.20);
     console.log(`${this.getName()} aumento su indice de defensa magica un 20%`);
   }
+
   public defensaFisica(): void {
     this.setDefFisica(this.getDefFisica() * 1.20);
     console.log(`${this.getName()} aumento su indice de defensa fisica un 20%`);
   }
+
   public curar(): void {
     this.setVida(this.getVida() + 20);
     console.log(`${this.getName()} aumento 20 puntos de vida`);
   }
 
   public usarHabilidad(heroe: Heroe, target?: Heroe): void {
-    let random = Math.floor(Math.random() * this.habilidades.length);
+    let random: number = Math.floor(Math.random() * this.habilidades.length);
      if (this.habilidades[random].getTipo() == "Defensa") {
       this.habilidades[random].habilidadDef(heroe);
      } else {
@@ -57,7 +58,7 @@ export class Luchador extends Heroe {
   }
 
   public abrirCaja(): void {
-    let nuevaHabilidad = Math.floor(Math.random() * 2) + 1;
+    let nuevaHabilidad: number = Math.floor(Math.random() * 2) + 1;
     switch (nuevaHabilidad) {
       case 1:
         this.habilidades.push(new Habilidad(

@@ -9,6 +9,21 @@ var Habilidad = /** @class */ (function () {
         this.efecto = nuevoEfecto;
         this.nivel = nivelMinimo;
     }
+    //GETTERS
+    Habilidad.prototype.getNombre = function () {
+        return this.nombre;
+    };
+    Habilidad.prototype.getNivel = function () {
+        return this.nivel;
+    };
+    Habilidad.prototype.getTipo = function () {
+        return this.tipo;
+    };
+    //SETTERS
+    Habilidad.prototype.setUsuario = function (nuevoUsuario) {
+        this.usuario = nuevoUsuario;
+    };
+    //METODOS
     Habilidad.prototype.habilidadAtk = function (heroe, target) {
         if (this.verificarAcceso(heroe)) {
             this.efecto(target);
@@ -20,12 +35,12 @@ var Habilidad = /** @class */ (function () {
         }
     };
     Habilidad.prototype.verificarAcceso = function (heroe) {
-        if (heroe.nivel < this.nivel) {
-            console.log("Necesitas ser nivel ".concat(this.nivel, " para usar esta habilidad."));
+        if (heroe.getNivel() < this.getNivel()) {
+            console.log("Necesitas ser nivel ".concat(this.getNivel(), " para usar esta habilidad."));
             return false;
         }
         if (!(heroe instanceof this.usuario.constructor)) {
-            console.log("".concat(heroe.nombre, " no puede usar esta habilidad, solo ").concat(this.usuario.constructor.name, " puede."));
+            console.log("".concat(heroe.getName(), " no puede usar esta habilidad, solo ").concat(this.usuario.constructor.name, " puede."));
             return false;
         }
         return true;
