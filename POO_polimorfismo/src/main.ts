@@ -8,4 +8,4 @@ function main(): void {
 
 main();
 
-// AGREGAR HABILIDADES AL SUBIR DE NIVEL
+// VALIDAR STATS NO BAJEN DE 0

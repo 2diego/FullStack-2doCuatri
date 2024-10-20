@@ -50,11 +50,15 @@ var Heroe = /** @class */ (function () {
     };
     Heroe.prototype.setAtkFisico = function (puntos, name) {
         this.atkFisico.puntos = puntos;
-        this.atkFisico.name = name;
+        if (name) {
+            this.atkFisico.name = name;
+        }
     };
     Heroe.prototype.setAtkMagico = function (puntos, name) {
         this.atkMagico.puntos = puntos;
-        this.atkMagico.name = name;
+        if (name) {
+            this.atkMagico.name = name;
+        }
     };
     Heroe.prototype.setDefFisica = function (nuevoDefFisica) {
         this.defFisica = nuevoDefFisica;

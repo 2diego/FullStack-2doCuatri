@@ -24,22 +24,8 @@ var Habilidad = /** @class */ (function () {
         this.usuario = nuevoUsuario;
     };
     //METODOS
-    Habilidad.prototype.habilidadAtk = function (heroe, target) {
-        if (this.verificarAcceso(heroe)) {
-            this.efecto(target);
-        }
-    };
-    Habilidad.prototype.habilidadDef = function (heroe) {
-        if (this.verificarAcceso(heroe)) {
-            this.efecto(heroe);
-        }
-    };
-    Habilidad.prototype.verificarAcceso = function (heroe) {
-        if (heroe.getNivel() < this.getNivel()) {
-            console.log("Necesitas ser nivel ".concat(this.getNivel(), " para usar esta habilidad."));
-            return false;
-        }
-        return true;
+    Habilidad.prototype.efectoHabilidad = function (target) {
+        this.efecto(target);
     };
     return Habilidad;
 }());

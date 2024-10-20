@@ -70,10 +70,10 @@ var Arquero = /** @class */ (function (_super) {
         var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= heroe.getNivel(); });
         var random = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
         if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
-            habilidadesDesbloqueadas[random].habilidadDef(heroe);
+            habilidadesDesbloqueadas[random].efectoHabilidad(heroe);
         }
         else {
-            habilidadesDesbloqueadas[random].habilidadAtk(heroe, target);
+            habilidadesDesbloqueadas[random].efectoHabilidad(target);
         }
     };
     Arquero.prototype.abrirCaja = function () {

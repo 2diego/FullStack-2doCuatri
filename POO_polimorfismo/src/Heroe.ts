@@ -65,12 +65,16 @@ public setVida(nuevaVida: number): void {
 
 public setAtkFisico(puntos: number, name?: string): void {
   this.atkFisico.puntos = puntos;
+  if (name) {
     this.atkFisico.name = name;
+  }
 }
 
 public setAtkMagico(puntos: number, name?: string): void {
   this.atkMagico.puntos = puntos;
+  if (name) {
     this.atkMagico.name = name;
+  }
 }
 
 public setDefFisica(nuevoDefFisica: number): void {
