@@ -7,5 +7,3 @@ function main(): void {
 }
 
 main();
-
-// VALIDAR STATS NO BAJEN DE 0

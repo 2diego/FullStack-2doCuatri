@@ -20,7 +20,6 @@ El combate ocurre por turnos, donde el jugador y la CPU alternan acciones. En ca
 
 Habilidades Especiales
 Cada clase tiene habilidades únicas que se activan bajo ciertas condiciones, como ser de la clase correcta o tener un nivel mínimo. Las habilidades pueden ser de ataque o de defensa.
-Actualmente las habilidades que se ejecutan son al azar pero se planea añadir la capacidad de elegir la habilidad.
 
 Diseño del Código
 Estructura de Clases

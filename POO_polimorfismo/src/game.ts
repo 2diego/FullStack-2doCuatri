@@ -125,8 +125,6 @@ export function game(): void {
             player.abrirCaja();
           }
         }
-        //player.vida = Math.min(player.vida + 30, 100); // Recuperar 30 puntos de vida sin superar 100
-        //log player recupero vida
         return;
       }
 
