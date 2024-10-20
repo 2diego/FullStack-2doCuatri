@@ -19,6 +19,7 @@ exports.Brujo = void 0;
 var Heroe_1 = require("./Heroe");
 var Habilidad_1 = require("./Habilidad");
 var habilidadesBrujo_1 = require("./habilidadesBrujo");
+var habilidadesLuchador_1 = require("./habilidadesLuchador");
 var Brujo = /** @class */ (function (_super) {
     __extends(Brujo, _super);
     function Brujo(nuevoNombre) {
@@ -29,14 +30,17 @@ var Brujo = /** @class */ (function (_super) {
         _this.setAtkMagico(5, "Mal de ojo");
         _this.setDefFisica(50);
         _this.setDefMagica(50);
-        _this.habilidades = [habilidadesBrujo_1.EnfocarDefensa, habilidadesBrujo_1.Maldecir];
+        _this.habilidades = [habilidadesBrujo_1.EnfocarDefensa, habilidadesLuchador_1.EnfocarAtaque, habilidadesBrujo_1.Maldecir, habilidadesBrujo_1.Meditacion];
         habilidadesBrujo_1.EnfocarDefensa.setUsuario(_this);
+        habilidadesLuchador_1.EnfocarAtaque.setUsuario(_this);
         habilidadesBrujo_1.Maldecir.setUsuario(_this);
         habilidadesBrujo_1.Meditacion.setUsuario(_this);
         return _this;
     }
     Brujo.prototype.getHabilidades = function () {
-        return this.habilidades.map(function (hab) { return hab.getNombre(); });
+        var _this = this;
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= _this.getNivel(); });
+        return habilidadesDesbloqueadas.map(function (hab) { return hab.getNombre(); });
     };
     Brujo.prototype.ataqueMagico = function (target) {
         var dmg = this.getAtkMagico() * (1 - (target.getDefMagica() / 100));
@@ -64,12 +68,13 @@ var Brujo = /** @class */ (function (_super) {
         console.log("".concat(this.getName(), " aumento 30 puntos de vida"));
     };
     Brujo.prototype.usarHabilidad = function (heroe, target) {
-        var random = Math.floor(Math.random() * this.habilidades.length);
-        if (this.habilidades[random].getTipo() == "Defensa") {
-            this.habilidades[random].habilidadDef(heroe);
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= heroe.getNivel(); });
+        var random = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
+        if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
+            habilidadesDesbloqueadas[random].habilidadDef(heroe);
         }
         else {
-            this.habilidades[random].habilidadAtk(heroe, target);
+            habilidadesDesbloqueadas[random].habilidadAtk(heroe, target);
         }
     };
     Brujo.prototype.abrirCaja = function () {

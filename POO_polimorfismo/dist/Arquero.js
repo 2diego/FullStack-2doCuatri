@@ -29,14 +29,17 @@ var Arquero = /** @class */ (function (_super) {
         _this.setAtkMagico(8, "Lluvia de flechas");
         _this.setDefFisica(50);
         _this.setDefMagica(10);
-        _this.habilidades = [habilidadesArquero_1.EnfocarDefensa, habilidadesArquero_1.FlechaPesada];
+        _this.habilidades = [habilidadesArquero_1.EnfocarDefensa, habilidadesArquero_1.EnfocarAtaque, habilidadesArquero_1.FlechaPesada, habilidadesArquero_1.Meditacion];
         habilidadesArquero_1.EnfocarDefensa.setUsuario(_this);
+        habilidadesArquero_1.EnfocarAtaque.setUsuario(_this);
         habilidadesArquero_1.FlechaPesada.setUsuario(_this);
         habilidadesArquero_1.Meditacion.setUsuario(_this);
         return _this;
     }
     Arquero.prototype.getHabilidades = function () {
-        return this.habilidades.map(function (hab) { return hab.getNombre(); });
+        var _this = this;
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= _this.getNivel(); });
+        return habilidadesDesbloqueadas.map(function (hab) { return hab.getNombre(); });
     };
     Arquero.prototype.ataqueFisico = function (target) {
         var dmg = this.getAtkFisico() * (1 - (target.getDefFisica() / 100));
@@ -64,12 +67,13 @@ var Arquero = /** @class */ (function (_super) {
         console.log("".concat(this.getName(), " aumento 30 puntos de vida"));
     };
     Arquero.prototype.usarHabilidad = function (heroe, target) {
-        var random = Math.floor(Math.random() * this.habilidades.length);
-        if (this.habilidades[random].getTipo() == "Defensa") {
-            this.habilidades[random].habilidadDef(heroe);
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= heroe.getNivel(); });
+        var random = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
+        if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
+            habilidadesDesbloqueadas[random].habilidadDef(heroe);
         }
         else {
-            this.habilidades[random].habilidadAtk(heroe, target);
+            habilidadesDesbloqueadas[random].habilidadAtk(heroe, target);
         }
     };
     Arquero.prototype.abrirCaja = function () {

@@ -19,6 +19,7 @@ exports.Mago = void 0;
 var Heroe_1 = require("./Heroe");
 var Habilidad_1 = require("./Habilidad");
 var habilidadesMago_1 = require("./habilidadesMago");
+var habilidadesLuchador_1 = require("./habilidadesLuchador");
 var Mago = /** @class */ (function (_super) {
     __extends(Mago, _super);
     function Mago(nuevoNombre) {
@@ -29,14 +30,17 @@ var Mago = /** @class */ (function (_super) {
         _this.setAtkMagico(25, "Liberar energia");
         _this.setDefFisica(7);
         _this.setDefMagica(30);
-        _this.habilidades = [habilidadesMago_1.EnfocarDefensa, habilidadesMago_1.BolaDeFuego];
+        _this.habilidades = [habilidadesMago_1.EnfocarDefensa, habilidadesLuchador_1.EnfocarAtaque, habilidadesMago_1.BolaDeFuego, habilidadesMago_1.Meditacion];
         habilidadesMago_1.EnfocarDefensa.setUsuario(_this);
+        habilidadesLuchador_1.EnfocarAtaque.setUsuario(_this);
         habilidadesMago_1.BolaDeFuego.setUsuario(_this);
         habilidadesMago_1.Meditacion.setUsuario(_this);
         return _this;
     }
     Mago.prototype.getHabilidades = function () {
-        return this.habilidades.map(function (hab) { return hab.getNombre(); });
+        var _this = this;
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= _this.getNivel(); });
+        return habilidadesDesbloqueadas.map(function (hab) { return hab.getNombre(); });
     };
     Mago.prototype.ataqueMagico = function (target) {
         var dmg = this.getAtkMagico() * (1 - (target.getDefMagica() / 100));
@@ -69,12 +73,13 @@ var Mago = /** @class */ (function (_super) {
         console.log("".concat(this.getName(), " aumento 20 puntos de vida"));
     };
     Mago.prototype.usarHabilidad = function (heroe, target) {
-        var random = Math.floor(Math.random() * this.habilidades.length);
-        if (this.habilidades[random].getTipo() == "Defensa") {
-            this.habilidades[random].habilidadDef(heroe);
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= heroe.getNivel(); });
+        var random = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
+        if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
+            habilidadesDesbloqueadas[random].habilidadDef(heroe);
         }
         else {
-            this.habilidades[random].habilidadAtk(heroe, target);
+            habilidadesDesbloqueadas[random].habilidadAtk(heroe, target);
         }
     };
     Mago.prototype.abrirCaja = function () {

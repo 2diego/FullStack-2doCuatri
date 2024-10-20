@@ -1,6 +1,6 @@
 import { Heroe } from "./Heroe";
 import { Habilidad } from "./Habilidad";
-import { EnfocarDefensa, LanzaRocas, Meditacion } from "./habilidadesLuchador";
+import { EnfocarAtaque, EnfocarDefensa, LanzaRocas, Meditacion } from "./habilidadesLuchador";
 
 export class Luchador extends Heroe {
   public habilidades: Habilidad[] = [];
@@ -11,15 +11,17 @@ export class Luchador extends Heroe {
     this.setAtkMagico(0, "Golpe energetico destructor");
     this.setDefFisica(30);
     this.setDefMagica(10);
-    this.habilidades = [EnfocarDefensa, LanzaRocas];
+    this.habilidades = [EnfocarDefensa, EnfocarAtaque, LanzaRocas, Meditacion];
 
     EnfocarDefensa.setUsuario(this);
+    EnfocarAtaque.setUsuario(this);
     LanzaRocas.setUsuario(this);
     Meditacion.setUsuario(this);
   }
 
   public getHabilidades(): String[] {
-    return this.habilidades.map((hab) => hab.getNombre());
+    let habilidadesDesbloqueadas = this.habilidades.filter((hab) => hab.getNivel() <= this.getNivel());
+    return habilidadesDesbloqueadas.map((hab) => hab.getNombre());
   }
 
   public ataqueMagico(target: Heroe): void {
@@ -49,11 +51,12 @@ export class Luchador extends Heroe {
   }
 
   public usarHabilidad(heroe: Heroe, target?: Heroe): void {
-    let random: number = Math.floor(Math.random() * this.habilidades.length);
-     if (this.habilidades[random].getTipo() == "Defensa") {
-      this.habilidades[random].habilidadDef(heroe);
+    let habilidadesDesbloqueadas = this.habilidades.filter((hab) => hab.getNivel() <= heroe.getNivel());
+    let random: number = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
+     if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
+      habilidadesDesbloqueadas[random].efectoHabilidad(heroe);
      } else {
-      this.habilidades[random].habilidadAtk(heroe, target);
+      habilidadesDesbloqueadas[random].efectoHabilidad(target);
      }
   }
 

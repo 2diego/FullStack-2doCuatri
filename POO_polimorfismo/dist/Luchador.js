@@ -29,14 +29,17 @@ var Luchador = /** @class */ (function (_super) {
         _this.setAtkMagico(0, "Golpe energetico destructor");
         _this.setDefFisica(30);
         _this.setDefMagica(10);
-        _this.habilidades = [habilidadesLuchador_1.EnfocarDefensa, habilidadesLuchador_1.LanzaRocas];
+        _this.habilidades = [habilidadesLuchador_1.EnfocarDefensa, habilidadesLuchador_1.EnfocarAtaque, habilidadesLuchador_1.LanzaRocas, habilidadesLuchador_1.Meditacion];
         habilidadesLuchador_1.EnfocarDefensa.setUsuario(_this);
+        habilidadesLuchador_1.EnfocarAtaque.setUsuario(_this);
         habilidadesLuchador_1.LanzaRocas.setUsuario(_this);
         habilidadesLuchador_1.Meditacion.setUsuario(_this);
         return _this;
     }
     Luchador.prototype.getHabilidades = function () {
-        return this.habilidades.map(function (hab) { return hab.getNombre(); });
+        var _this = this;
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= _this.getNivel(); });
+        return habilidadesDesbloqueadas.map(function (hab) { return hab.getNombre(); });
     };
     Luchador.prototype.ataqueMagico = function (target) {
         console.log("".concat(this.getName(), " se concentra pero no ocurre nada..."));
@@ -60,12 +63,13 @@ var Luchador = /** @class */ (function (_super) {
         console.log("".concat(this.getName(), " aumento 20 puntos de vida"));
     };
     Luchador.prototype.usarHabilidad = function (heroe, target) {
-        var random = Math.floor(Math.random() * this.habilidades.length);
-        if (this.habilidades[random].getTipo() == "Defensa") {
-            this.habilidades[random].habilidadDef(heroe);
+        var habilidadesDesbloqueadas = this.habilidades.filter(function (hab) { return hab.getNivel() <= heroe.getNivel(); });
+        var random = Math.floor(Math.random() * habilidadesDesbloqueadas.length);
+        if (habilidadesDesbloqueadas[random].getTipo() == "Defensa") {
+            habilidadesDesbloqueadas[random].habilidadDef(heroe);
         }
         else {
-            this.habilidades[random].habilidadAtk(heroe, target);
+            habilidadesDesbloqueadas[random].habilidadAtk(heroe, target);
         }
     };
     Luchador.prototype.abrirCaja = function () {

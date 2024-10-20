@@ -39,10 +39,6 @@ var Habilidad = /** @class */ (function () {
             console.log("Necesitas ser nivel ".concat(this.getNivel(), " para usar esta habilidad."));
             return false;
         }
-        if (!(heroe instanceof this.usuario.constructor)) {
-            console.log("".concat(heroe.getName(), " no puede usar esta habilidad, solo ").concat(this.usuario.constructor.name, " puede."));
-            return false;
-        }
         return true;
     };
     return Habilidad;

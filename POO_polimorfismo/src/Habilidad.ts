@@ -22,7 +22,7 @@ export class Habilidad {
   public getNombre(): string {
     return this.nombre;
   }
-  
+
   public getNivel(): number {
     return this.nivel;
   }
@@ -37,29 +37,7 @@ export class Habilidad {
   }
 
 //METODOS
-  public habilidadAtk(heroe: Heroe, target: Heroe): void {
-    if (this.verificarAcceso(heroe)) {
+  public efectoHabilidad(target: Heroe): void {
       this.efecto(target);
-    }
-  }
-
-  public habilidadDef(heroe: Heroe): void {
-    if (this.verificarAcceso(heroe)) {
-      this.efecto(heroe);
-    }
-  }
-
-  private verificarAcceso(heroe: Heroe): boolean {
-    if (heroe.getNivel() < this.getNivel()) {
-      console.log(`Necesitas ser nivel ${this.getNivel()} para usar esta habilidad.`);
-      return false;
-    }
-    
-    if (!(heroe instanceof this.usuario.constructor)) {
-      console.log(`${heroe.getName()} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
-      return false;
-    }
-
-    return true;
   }
 }

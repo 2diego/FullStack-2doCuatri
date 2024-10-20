@@ -6,4 +6,4 @@ function main() {
     (0, game_1.game)();
 }
 main();
-// MEJORAR MENSAJES DE LA TERMINAL: MOSTRAR STATS, ATAQUES, BUFFOS
+// AGREGAR HABILIDADES AL SUBIR DE NIVEL
