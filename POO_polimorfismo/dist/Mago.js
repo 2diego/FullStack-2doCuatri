@@ -72,8 +72,8 @@ var Mago = /** @class */ (function (_super) {
         var nuevaHabilidad = Math.floor(Math.random() * 2) + 1;
         switch (nuevaHabilidad) {
             case 1:
-                this.habilidades.push(new Habilidad_1.Habilidad("Salto alto", "Defensa", null, function (heroe) {
-                    console.log("".concat(heroe.nombre, " ha saltado muy alto, no tiene ningun efecto."));
+                this.habilidades.push(new Habilidad_1.Habilidad("Levitar", "Defensa", null, function (heroe) {
+                    console.log("".concat(heroe.nombre, " esta levitando, no tiene ningun efecto."));
                 }, 1));
                 this.abrioCaja = true;
                 break;

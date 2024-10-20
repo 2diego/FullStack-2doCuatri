@@ -5,11 +5,11 @@ import { Arquero } from "./Arquero";
 import { Brujo } from "./Brujo";
 
 export class Habilidad {
-  public nombre: string;
-  public tipo: string;
-  public usuario: Mago | Arquero | Luchador | Brujo;
+  private nombre: string;
+  private tipo: string;
+  private usuario: Mago | Arquero | Luchador | Brujo;
   private efecto: (heroe?: Heroe, target?: Heroe) => void;
-  public nivel: number;
+  private nivel: number;
   constructor(nuevaHabilidad: string, nuevoTipo: string, nuevoUsuario: Mago | Arquero | Luchador | Brujo, nuevoEfecto: (heroe?: Heroe, target?: Heroe) => void, nivelMinimo: number) {
     this.nombre = nuevaHabilidad;
     this.tipo = nuevoTipo; 
@@ -18,6 +18,21 @@ export class Habilidad {
     this.nivel = nivelMinimo
   }
 
+  //GETTERS
+  public getNivel(): number {
+    return this.nivel;
+  }
+
+  public getTipo(): string {
+    return this.tipo;
+  }
+
+//SETTERS
+  public setUsuario(nuevoUsuario: Mago | Arquero | Luchador | Brujo): void {
+    this.usuario = nuevoUsuario;
+  }
+
+//METODOS
   public habilidadAtk(heroe: Heroe, target: Heroe): void {
     if (this.verificarAcceso(heroe)) {
       this.efecto(target);
@@ -31,13 +46,13 @@ export class Habilidad {
   }
 
   private verificarAcceso(heroe: Heroe): boolean {
-    if (heroe.nivel < this.nivel) {
-      console.log(`Necesitas ser nivel ${this.nivel} para usar esta habilidad.`);
+    if (heroe.getNivel() < this.getNivel()) {
+      console.log(`Necesitas ser nivel ${this.getNivel()} para usar esta habilidad.`);
       return false;
     }
     
     if (!(heroe instanceof this.usuario.constructor)) {
-      console.log(`${heroe.nombre} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
+      console.log(`${heroe.getName()} no puede usar esta habilidad, solo ${this.usuario.constructor.name} puede.`);
       return false;
     }
 

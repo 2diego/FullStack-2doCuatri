@@ -6,45 +6,50 @@ export class Mago extends Heroe {
   public habilidades: Habilidad[] = [];
   constructor(nuevoNombre: string) {
     super(nuevoNombre);
-    this.vida = 100;
-    this.atkFisico = 0;
-    this.atkMagico = 20;
-    this.defFisica = 7;
-    this.defMagica = 20;
+    this.setVida(100);
+    this.setAtkFisico(0);
+    this.setAtkMagico(20);
+    this.setDefFisica(7);
+    this.setDefMagica(30);
     this.habilidades = [EnfocarDefensa, BolaDeFuego];
 
-    EnfocarDefensa.usuario = this;
-    BolaDeFuego.usuario = this;
-    Meditacion.usuario = this;
+    EnfocarDefensa.setUsuario(this);
+    BolaDeFuego.setUsuario(this);
+    Meditacion.setUsuario(this);
   }
-  public ataqueMagico(heroe: Heroe): void {
-    let dmg = this.atkMagico * (1 - (heroe.defMagica/100))
-    heroe.vida -= dmg;
-    console.log(`${heroe.nombre} recibio un ataque de ${dmg} puntos de vida de ${this.nombre}`);
+  
+  public getHabilidades(): Habilidad[] {
+    return this.habilidades;
+  }
+
+  public ataqueMagico(target: Heroe): void {
+    let dmg = this.getAtkMagico() * (1 - (target.getDefMagica()/100))
+    target.setVida(target.getVida() - dmg);
+    console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
     this.sumarExperiencia(dmg);
   }
-  public ataqueFisico(heroe: Heroe): void {
-    let dmg = this.atkFisico * (1 - (heroe.defFisica/100))
-    heroe.vida -= dmg;
-    console.log(`${heroe.nombre} recibio un ataque de ${dmg} puntos de vida de ${this.nombre}`);
+  public ataqueFisico(target: Heroe): void {
+    let dmg = this.getAtkFisico() * (1 - (target.getDefFisica()/100))
+    target.setVida(target.getVida() - dmg);
+    console.log(`${target.getName()} recibio un ataque de ${dmg} puntos de vida de ${this.getName()}`);
     this.sumarExperiencia(dmg);
   }
   public defensaMagica() {
-    this.defMagica = this.defMagica * 1.20;
-    console.log(`${this.nombre} aumento su defensa magica un 20%`);
+    this.setDefMagica(this.getDefMagica() * 1.20);
+    console.log(`${this.getName()} aumento su indice de defensa magica un 20%`);
   }
   public defensaFisica(): void {
-    this.defFisica = this.defFisica * 1.20;
-    console.log(`${this.nombre} aumento su defensa fisica un 20%`);
+    this.setDefFisica(this.getDefFisica() * 1.20);
+    console.log(`${this.getName()} aumento su indice de defensa fisica un 20%`);
   }
   public curar(): void {
-    this.vida += 20;
-    console.log(`${this.nombre} se curo 20 puntos de vida`);
+    this.setVida(this.getVida() + 20);
+    console.log(`${this.getName()} aumento 20 puntos de vida`);
   }
 
   public usarHabilidad(heroe: Heroe, target?: Heroe): void {
     let random = Math.floor(Math.random() * this.habilidades.length);
-     if (this.habilidades[random].tipo == "Defensa") {
+     if (this.habilidades[random].getTipo() == "Defensa") {
       this.habilidades[random].habilidadDef(heroe);
      } else {
       this.habilidades[random].habilidadAtk(heroe, target);
@@ -56,15 +61,15 @@ export class Mago extends Heroe {
     switch (nuevaHabilidad) {
       case 1:
         this.habilidades.push(new Habilidad(
-          "Salto alto",
+          "Levitar",
           "Defensa",
           null,
           (heroe: Heroe) => {
-            console.log(`${heroe.nombre} ha saltado muy alto, no tiene ningun efecto.`);
+            console.log(`${heroe.getName()} esta levitando, no tiene ningun efecto.`);
           },
           1
         ));
-        this.abrioCaja = true;
+        this.setAbrioCaja(true);
         break;
       case 2:
         this.habilidades.push(new Habilidad(
@@ -73,14 +78,14 @@ export class Mago extends Heroe {
           null,
           (target: Heroe) => {
             let dmg = 60;
-            target.vida -= dmg;
-            console.log(`${target.nombre} ha recibido un ataque demasiado fuerte y perdio ${dmg} puntos de vida.`);
+            target.setVida(target.getVida() - dmg);
+            console.log(`${target.getName()} ha recibido un ataque demasiado fuerte y perdio ${dmg} puntos de vida.`);
           },
           2
         ));
-        this.abrioCaja = true;
+        this.setAbrioCaja(true);
         break;
     }
-    console.log(`${this.nombre} abrio la caja`);
+    console.log(`${this.getName()} abrio la caja`);
   }
 }

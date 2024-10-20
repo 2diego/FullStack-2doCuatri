@@ -1,21 +1,84 @@
 export abstract class Heroe {
-  public nombre: string;
-  public nivel: number = 1;
-  public experiencia: number = 0;
-  public vida: number;
-  public atkFisico: number;
-  public atkMagico: number;
-  public defFisica: number;
-  public defMagica: number;
-  public abrioCaja: boolean = false;
+  private nombre: string;
+  private nivel: number = 1;
+  private experiencia: number = 0;
+  private vida: number;
+  private atkFisico: number;
+  private atkMagico: number;
+  private defFisica: number; //porcentaje
+  private defMagica: number; //porcentaje
+  private abrioCaja: boolean = false;
 
   constructor(nuevoNombre: string) {
     this.nombre = nuevoNombre
   }
 
- abstract ataqueMagico(heroe: Heroe): void;
+  //GETTERS
+public getName(): string {
+  return this.nombre
+}
 
- abstract ataqueFisico(heroe: Heroe): void;
+public getNivel(): number {
+  return this.nivel
+}
+
+public getVida(): number {
+  return this.vida
+}
+
+public getAtkFisico(): number {
+  return this.atkFisico
+}
+
+public getAtkMagico(): number {
+  return this.atkMagico
+}
+
+public getDefFisica(): number {
+  return this.defFisica
+}
+
+public getDefMagica(): number {
+  return this.defMagica
+}
+
+public getAbrioCaja(): boolean {
+  return this.abrioCaja
+}
+
+//SETTERS
+public setNivel(nuevoNivel: number): void {
+  this.nivel = nuevoNivel;
+}
+
+public setVida(nuevaVida: number): void {
+  this.vida = nuevaVida;
+}
+
+public setAtkFisico(nuevoAtkFisico: number): void {
+  this.atkFisico = nuevoAtkFisico;
+}
+
+public setAtkMagico(nuevoAtkMagico: number): void {
+  this.atkMagico = nuevoAtkMagico;
+}
+
+public setDefFisica(nuevoDefFisica: number): void {
+  this.defFisica = nuevoDefFisica;
+}
+
+public setDefMagica(nuevoDefMagica: number): void {
+  this.defMagica = nuevoDefMagica;
+}
+
+public setAbrioCaja(nuevoAbrioCaja: boolean): void {
+  this.abrioCaja = nuevoAbrioCaja;
+}
+
+//METODOS
+ abstract ataqueMagico(target: Heroe): void;
+
+ abstract ataqueFisico(target: Heroe): void;
 
  abstract defensaMagica(): void;
 

@@ -111,7 +111,7 @@ function game() {
                     player.curar();
                     break;
                 case 6:
-                    console.log("\nElige una habilidad:");
+                    console.log("\n${player.nombre} ha usado una habilidad:");
                     player.usarHabilidad(player, cpu);
                     break;
                 default:

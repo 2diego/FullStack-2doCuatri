@@ -1,11 +1,11 @@
 import { game } from './game';
 
 function main(): void {
-  console.log("¡Bienvenido/a a la arena!");
+  console.log(`\n
+          ---¡BIENVENIDO/A A LA ARENA!---`);
   game();
 }
 
 main();
 
-// MEJORAR MENSAJES DE LA TERMINAL: MOSTRAR STATS, BUFFOS..
-//AGREGAR PARA ELEGIR QUE HABILIDAD USAR
+// MEJORAR MENSAJES DE LA TERMINAL: MOSTRAR STATS, ATAQUES, BUFFOS
