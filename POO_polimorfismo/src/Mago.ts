@@ -50,4 +50,37 @@ export class Mago extends Heroe {
       this.habilidades[random].habilidadAtk(heroe, target);
      }
   }
+
+  public abrirCaja(): void {
+    let nuevaHabilidad = Math.floor(Math.random() * 2) + 1;
+    switch (nuevaHabilidad) {
+      case 1:
+        this.habilidades.push(new Habilidad(
+          "Salto alto",
+          "Defensa",
+          null,
+          (heroe: Heroe) => {
+            console.log(`${heroe.nombre} ha saltado muy alto, no tiene ningun efecto.`);
+          },
+          1
+        ));
+        this.abrioCaja = true;
+        break;
+      case 2:
+        this.habilidades.push(new Habilidad(
+          "Destructor",
+          "Ataque",
+          null,
+          (target: Heroe) => {
+            let dmg = 60;
+            target.vida -= dmg;
+            console.log(`${target.nombre} ha recibido un ataque demasiado fuerte y perdio ${dmg} puntos de vida.`);
+          },
+          2
+        ));
+        this.abrioCaja = true;
+        break;
+    }
+    console.log(`${this.nombre} abrio la caja`);
+  }
 }

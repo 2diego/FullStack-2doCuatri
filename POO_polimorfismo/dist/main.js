@@ -6,4 +6,3 @@ function main() {
     (0, game_1.game)();
 }
 main();
-// CAJA DE HABILIDADES (objeto) QUE AL ABRIR DESBLOQUEA UNA HABILIDAD NUEVA USABLE AL NV 1, CPU LVL UP

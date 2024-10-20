@@ -108,7 +108,7 @@ export function game(): void {
           player.curar();
           break;
         case 6:
-          console.log("\nElige una habilidad:");
+          console.log("\n${player.nombre} ha usado una habilidad:");
           player.usarHabilidad(player, cpu);
           break;
         default:
@@ -118,6 +118,14 @@ export function game(): void {
       // Verificar si la CPU ha sido derrotada
       if (cpu.vida <= 0) {
         console.log(`\n${cpu.nombre} ha sido derrotado. ¡Has ganado esta ronda!`);
+
+        if (player.abrioCaja === false) {
+          let ganarCaja = Math.floor(Math.random() * 10) + 1;
+          if (ganarCaja > 7) {
+            console.log(`\n${cpu.nombre} ha dropeado una caja!`);
+            player.abrirCaja();
+          }
+        }
         //player.vida = Math.min(player.vida + 30, 100); // Recuperar 30 puntos de vida sin superar 100
         //log player recupero vida
         return;

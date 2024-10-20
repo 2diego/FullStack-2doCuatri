@@ -17,6 +17,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Brujo = void 0;
 var Heroe_1 = require("./Heroe");
+var Habilidad_1 = require("./Habilidad");
 var habilidadesBrujo_1 = require("./habilidadesBrujo");
 var Brujo = /** @class */ (function (_super) {
     __extends(Brujo, _super);
@@ -66,6 +67,26 @@ var Brujo = /** @class */ (function (_super) {
         else {
             this.habilidades[random].habilidadAtk(heroe, target);
         }
+    };
+    Brujo.prototype.abrirCaja = function () {
+        var nuevaHabilidad = Math.floor(Math.random() * 2) + 1;
+        switch (nuevaHabilidad) {
+            case 1:
+                this.habilidades.push(new Habilidad_1.Habilidad("Salto alto", "Defensa", null, function (heroe) {
+                    console.log("".concat(heroe.nombre, " ha saltado muy alto, no tiene ningun efecto."));
+                }, 1));
+                this.abrioCaja = true;
+                break;
+            case 2:
+                this.habilidades.push(new Habilidad_1.Habilidad("Destructor", "Ataque", null, function (target) {
+                    var dmg = 60;
+                    target.vida -= dmg;
+                    console.log("".concat(target.nombre, " ha recibido un ataque demasiado fuerte y perdio ").concat(dmg, " puntos de vida."));
+                }, 2));
+                this.abrioCaja = true;
+                break;
+        }
+        console.log("".concat(this.nombre, " abrio la caja"));
     };
     return Brujo;
 }(Heroe_1.Heroe));

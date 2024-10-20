@@ -7,6 +7,7 @@ export abstract class Heroe {
   public atkMagico: number;
   public defFisica: number;
   public defMagica: number;
+  public abrioCaja: boolean = false;
 
   constructor(nuevoNombre: string) {
     this.nombre = nuevoNombre
@@ -23,6 +24,8 @@ export abstract class Heroe {
  abstract curar(): void;
 
  abstract usarHabilidad(heroe: Heroe, target?: Heroe): void;
+
+ abstract abrirCaja(): void;
 
  public sumarExperiencia(dmg: number): void {
   this.experiencia += dmg;

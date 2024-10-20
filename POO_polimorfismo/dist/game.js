@@ -120,6 +120,13 @@ function game() {
             // Verificar si la CPU ha sido derrotada
             if (cpu.vida <= 0) {
                 console.log("\n".concat(cpu.nombre, " ha sido derrotado. \u00A1Has ganado esta ronda!"));
+                if (player.abrioCaja === false) {
+                    var ganarCaja = Math.floor(Math.random() * 10) + 1;
+                    if (ganarCaja > 7) {
+                        console.log("\n".concat(cpu.nombre, " ha dropeado una caja!"));
+                        player.abrirCaja();
+                    }
+                }
                 //player.vida = Math.min(player.vida + 30, 100); // Recuperar 30 puntos de vida sin superar 100
                 //log player recupero vida
                 return;

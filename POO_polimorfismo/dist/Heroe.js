@@ -5,6 +5,7 @@ var Heroe = /** @class */ (function () {
     function Heroe(nuevoNombre) {
         this.nivel = 1;
         this.experiencia = 0;
+        this.abrioCaja = false;
         this.nombre = nuevoNombre;
     }
     Heroe.prototype.sumarExperiencia = function (dmg) {
