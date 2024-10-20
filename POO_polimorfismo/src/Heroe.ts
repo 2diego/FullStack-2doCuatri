@@ -68,6 +68,9 @@ public setAtkFisico(puntos: number, name?: string): void {
   if (name) {
     this.atkFisico.name = name;
   }
+  if (this.atkFisico.puntos < 0) {
+    this.atkFisico.puntos = 0;
+  }
 }
 
 public setAtkMagico(puntos: number, name?: string): void {
@@ -75,14 +78,23 @@ public setAtkMagico(puntos: number, name?: string): void {
   if (name) {
     this.atkMagico.name = name;
   }
+  if (this.atkMagico.puntos < 0) {
+    this.atkMagico.puntos = 0;
+  }
 }
 
 public setDefFisica(nuevoDefFisica: number): void {
   this.defFisica = nuevoDefFisica;
+  if (this.defFisica < 0) {
+    this.defFisica = 0;
+  }
 }
 
 public setDefMagica(nuevoDefMagica: number): void {
   this.defMagica = nuevoDefMagica;
+  if (this.defMagica < 0) {
+    this.defMagica = 0;
+  }
 }
 
 public setAbrioCaja(nuevoAbrioCaja: boolean): void {

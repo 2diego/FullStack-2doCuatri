@@ -83,7 +83,7 @@ function game() {
         console.log("\n".concat(player.getName(), " se enfrentara a ").concat(cpu.getName(), "... "));
         while (player.getVida() > 0 && cpu.getVida() > 0) {
             // Turno del jugador
-            console.log("\n--- Turno de ".concat(player.getName(), " (").concat(player.getVida(), "HP) ---"));
+            console.log("\n--- Turno de ".concat(player.getName(), " | HP: ").concat(player.getVida(), " | LVL: ").concat(player.getNivel(), " ---"));
             var accionJugador = Number(readlineSync.question("Elige una accion:\n          1. Realizar ataque fisico                                       --".concat(player.getNombreAtkFisico(), " (Puntos de ataque fisico: ").concat(player.getAtkFisico(), ")\n          2. Realizar ataque magico                                       --").concat(player.getNombreAtkMagico(), " (Puntos de ataque magico: ").concat(player.getAtkMagico(), ")\n          3. Aumentar la defensa fisica                                   --Indice de defensa fisica: ").concat(player.getDefFisica(), "\n          4. Aumentar la defensa magica                                   --Indice de defensa magica: ").concat(player.getDefMagica(), "\n          5. Curarse\n          6. Usar una habilidad al azar                                   --Habilidades disponibles: ").concat(player.getHabilidades().join(", "), "\n        Ingresa el numero de tu accion: ")));
             while (isNaN(accionJugador) || accionJugador < 1 || accionJugador > 6) {
                 console.log("\nError: Debes ingresar un numero valido entre 1 y 6.");
@@ -132,7 +132,7 @@ function game() {
                 return;
             }
             // Turno de la CPU
-            console.log("\n--- Turno de ".concat(cpu.getName(), " ---"));
+            console.log("\n--- Turno de ".concat(cpu.getName(), " | HP: ").concat(cpu.getVida(), " | LVL: ").concat(cpu.getNivel(), " ---"));
             var accionCPU = Math.floor(Math.random() * 6) + 1;
             switch (accionCPU) {
                 case 1:

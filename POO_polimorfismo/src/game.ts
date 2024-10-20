@@ -70,7 +70,7 @@ export function game(): void {
 
     while (player.getVida() > 0 && cpu.getVida() > 0) {
       // Turno del jugador
-      console.log(`\n--- Turno de ${player.getName()} (${player.getVida()}HP) ---`);
+      console.log(`\n--- Turno de ${player.getName()} | HP: ${player.getVida()} | LVL: ${player.getNivel()} ---`);
       let accionJugador: number = Number(readlineSync.question(`Elige una accion:
           1. Realizar ataque fisico                                       --${player.getNombreAtkFisico()} (Puntos de ataque fisico: ${player.getAtkFisico()})
           2. Realizar ataque magico                                       --${player.getNombreAtkMagico()} (Puntos de ataque magico: ${player.getAtkMagico()})
@@ -131,7 +131,7 @@ export function game(): void {
       }
 
       // Turno de la CPU
-      console.log(`\n--- Turno de ${cpu.getName()} ---`);
+      console.log(`\n--- Turno de ${cpu.getName()} | HP: ${cpu.getVida()} | LVL: ${cpu.getNivel()} ---`);
       let accionCPU: number = Math.floor(Math.random() * 6) + 1;
 
       switch (accionCPU) {

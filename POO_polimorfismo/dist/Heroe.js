@@ -53,18 +53,30 @@ var Heroe = /** @class */ (function () {
         if (name) {
             this.atkFisico.name = name;
         }
+        if (this.atkFisico.puntos < 0) {
+            this.atkFisico.puntos = 0;
+        }
     };
     Heroe.prototype.setAtkMagico = function (puntos, name) {
         this.atkMagico.puntos = puntos;
         if (name) {
             this.atkMagico.name = name;
         }
+        if (this.atkMagico.puntos < 0) {
+            this.atkMagico.puntos = 0;
+        }
     };
     Heroe.prototype.setDefFisica = function (nuevoDefFisica) {
         this.defFisica = nuevoDefFisica;
+        if (this.defFisica < 0) {
+            this.defFisica = 0;
+        }
     };
     Heroe.prototype.setDefMagica = function (nuevoDefMagica) {
         this.defMagica = nuevoDefMagica;
+        if (this.defMagica < 0) {
+            this.defMagica = 0;
+        }
     };
     Heroe.prototype.setAbrioCaja = function (nuevoAbrioCaja) {
         this.abrioCaja = nuevoAbrioCaja;

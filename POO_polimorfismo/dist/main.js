@@ -6,4 +6,4 @@ function main() {
     (0, game_1.game)();
 }
 main();
-// AGREGAR HABILIDADES AL SUBIR DE NIVEL
+// VALIDAR STATS NO BAJEN DE 0
